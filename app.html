@@ -895,7 +895,7 @@
     <h2>About</h2>
     <div style="max-width:700px; margin:0 auto;">
       <div style="float:right; margin:0 0 20px 30px; max-width:220px;">
-        <img src="images/sew-head.jpg" alt="Erickson Wright" style="width:100%; border-radius:4px; border:2px solid var(--light-gray);">
+        <img data-lazy-src="images/sew-head.jpg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3C/svg%3E" alt="Erickson Wright" style="width:100%; border-radius:4px; border:2px solid var(--light-gray);">
       </div>
       <p style="margin-bottom:20px;">I was born in Michigan with a paint brush in my hand and the two of us have never since been separated.</p>
       <p style="margin-bottom:20px;">My life's journey to folk art has been full of adventure. In my early 20s, I flew for Pan American. That job allowed me to experience varied cultures — specifically art from Africa to Australia, Argentina to Austin and more! During my last three years with Pan Am, I created and ran my own art gallery in Tiburon, just north of San Francisco.</p>
@@ -1046,6 +1046,15 @@
         a.classList.toggle('active', href === '#' + id);
       });
 
+      // Load lazy images in the newly-visible section
+      if (target) {
+        var sectionLazy = target.querySelectorAll('img[data-lazy-src]');
+        sectionLazy.forEach(function(img) {
+          img.src = img.dataset.lazySrc;
+          delete img.dataset.lazySrc;
+        });
+      }
+
       // Gallery setup
       if (id === 'gallery') {
         initFilmstrip();
@@ -1155,7 +1164,9 @@
       __paintings.forEach(function(painting, i) {
         var thumb = document.createElement('img');
         thumb.className = 'film-thumb' + (i === 0 ? ' film-active' : '');
-        thumb.src = painting.img;
+        // Lazy load filmstrip thumbnails — only load first 6 immediately
+        if (i < 6) { thumb.src = painting.img; }
+        else { thumb.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3C/svg%3E"; thumb.dataset.lazySrc = painting.img; }
         thumb.alt = painting.title;
         thumb.dataset.title = painting.title;
         thumb.dataset.medium = painting.medium;
@@ -1171,9 +1182,27 @@
           updateGalleryPrice(painting);
         }
       });
+      // Lazy load remaining filmstrip thumbnails as they scroll into view
+      var lazyThumbs = filmstrip.querySelectorAll('img[data-lazy-src]');
+      if ('IntersectionObserver' in window) {
+        var thumbObserver = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              entry.target.src = entry.target.dataset.lazySrc;
+              delete entry.target.dataset.lazySrc;
+              thumbObserver.unobserve(entry.target);
+            }
+          });
+        }, { root: filmstrip, rootMargin: '300px' });
+        lazyThumbs.forEach(function(img) { thumbObserver.observe(img); });
+      } else {
+        lazyThumbs.forEach(function(img) { img.src = img.dataset.lazySrc; });
+      }
     }
     
     function selectFilmThumb(el) {
+      // Load lazy src if not yet loaded
+      if (el.dataset.lazySrc) { el.src = el.dataset.lazySrc; delete el.dataset.lazySrc; }
       document.getElementById('galleryFeaturedImg').src = el.src;
       document.getElementById('galleryFeaturedTitle').textContent = el.dataset.title || '';
       document.getElementById('galleryFeaturedMedium').textContent = el.dataset.medium || '';
