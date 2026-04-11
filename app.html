@@ -2145,6 +2145,7 @@ document.addEventListener('DOMContentLoaded', initFilmstrip);
     // Scroll filmstrip to keep active thumb visible
     thumbs[nextIdx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
   }
+  window.navFilmstrip = navFilmstrip;
 
   // ---- SWIPE GESTURES ----
   (function() {
