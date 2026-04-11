@@ -75,7 +75,7 @@ nav {
   padding: 0;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   padding-top: 0;
   background: rgba(10,10,10,0.92);
@@ -88,7 +88,7 @@ nav {
   body { padding-left: 64px; }
   nav { width: 64px; background: rgba(0,0,0,0.15) !important; backdrop-filter: saturate(180%) blur(16px); -webkit-backdrop-filter: saturate(180%) blur(16px); border-right: 1px solid rgba(255,255,255,0.1); }
   section#gallery.spa-active { background: transparent !important; }
-  body.gallery-grid-active { padding-left: 0 !important; }
+  body.gallery-grid-active, body.gallery-active { padding-left: 0 !important; }
   .nav-links a { width: 64px; height: 60px; }
   .nav-links a svg { width: 24px !important; height: 24px !important; }
   .nav-links a[data-tip]::before { left: 68px; }
@@ -559,7 +559,7 @@ section { padding: 100px 48px; }
   background: var(--gray);
   border: 1px solid var(--light-gray);
   padding: 32px 24px;
-  text-align: center;
+  text-align: left;
   transition: all 0.3s;
   position: relative;
   overflow: hidden;
@@ -910,7 +910,7 @@ footer p {
     padding: 0;
     border-right: none;
     border-bottom: 1px solid rgba(255,255,255,0.08);
-    background: rgba(10,10,10,0.55);
+    background: rgba(0,0,0,0.15);
     backdrop-filter: saturate(180%) blur(18px);
     -webkit-backdrop-filter: saturate(180%) blur(18px);
     z-index: 1000;
@@ -1006,7 +1006,8 @@ footer p {
   .gallery-grid { grid-template-columns: 1fr; gap: 3px; }
   section#gallery.spa-active {
     position: fixed !important;
-    top: 60px;
+    top: 0;
+    padding-top: 60px;
     left: 0;
     right: 0;
     bottom: 0;
@@ -1819,19 +1820,15 @@ var __paintings = [
       {title:"In The Pink", img:"images/pinkRooster.jpg", medium:"Acrylic on reclaimed door panel", price:"", forSale:true},
       {title:"Free Spirit Bear", img:"images/11---Free_Spirit-Bear---12__47075.jpg", medium:"Acrylic on reclaimed wood", price:"", forSale:true},
       {title:"Bear Spirit", img:"images/an2ikgl488tua3efcfib.jpg", medium:"Acrylic on reclaimed wood", price:"", forSale:true},
-      {title:"Bear in Red Frame", img:"images/images.jpg", medium:"Acrylic on reclaimed wood", price:"", forSale:true},
       {title:"Splash Pears", img:"images/SplashPear.jpg", medium:"Acrylic on vintage frame", price:"", forSale:true},
       {title:"Count Your Blessings", img:"images/sheep.jpg", medium:"Acrylic on reclaimed window", price:"", forSale:true},
       {title:"Crow at Dusk", img:"images/crow.jpg", medium:"Acrylic on vintage wood", price:"", forSale:true},
-      {title:"Warm Trees", img:"images/warmtrees.jpg", medium:"Acrylic on found surface", price:"", forSale:true},
       {title:"Whose Woods Are These", img:"images/treesWords.jpg", medium:"Mixed media on canvas", price:"", forSale:true},
       {title:"Golden Trees", img:"images/tree2.jpg", medium:"Acrylic on found surface", price:"", forSale:true},
       {title:"Amber Grove", img:"images/tree4.jpg", medium:"Acrylic on found surface", price:"", forSale:true},
       {title:"Purple Treeline", img:"images/treespurp.jpg", medium:"Acrylic on canvas", price:"", forSale:true},
-      {title:"Sunset Pasture", img:"images/saw4_sunset_lg.jpg", medium:"Acrylic on vintage window", price:"", forSale:true},
       {title:"Brown Cow", img:"images/COWnew_Brown.jpg", medium:"Acrylic on reclaimed wood", price:"", forSale:true},
       {title:"Ghost Cow", img:"images/Cow_Ghost.jpg", medium:"Acrylic on reclaimed wood", price:"", forSale:true},
-      {title:"Show Me the Way to Go Home", img:"images/showMe.jpg", medium:"Acrylic on found surface", price:"", forSale:true},
       {title:"Cash Cow", img:"images/9842794.jpeg", medium:"Mixed media on canvas", price:"", forSale:true},
       {title:"Chix Tip-Toeing", img:"images/Chix_TipToeing.jpg", medium:"Acrylic on found surface", price:"", forSale:true},
       {title:"Free Range", img:"images/2---Free-Range---5---__83493.jpg", medium:"Acrylic on reclaimed wood", price:"", forSale:true},
@@ -1975,6 +1972,7 @@ function showPage(id) {
     target.classList.add('spa-active');
     window.scrollTo(0, 0);
   }
+  document.body.classList.toggle('gallery-active', id === 'gallery');
   document.querySelectorAll('.nav-links a').forEach(function(a) {
     var href = a.getAttribute('href');
     a.classList.toggle('active', href === '#' + id);
