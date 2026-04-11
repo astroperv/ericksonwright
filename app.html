@@ -20,23 +20,23 @@
 <meta name="description" content="Original paintings, signed prints, and merch by Erickson Wright. Raw urban art with attitude.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Lora:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Futura&family=Helvetica:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --black: #0a0a0a;
-  --dark: #111111;
-  --gray: #1a1a1a;
-  --light-gray: #2a2a2a;
+  --black: #1a120d;
+  --dark: #1e1510;
+  --gray: #261c14;
+  --light-gray: #33261b;
   --white: #fff8f0;
   --cream: #d4c5b0;
   --red: #c8872e;
   --teal: #5a7c65;
   --yellow: #d4a84b;
-  --font-display: 'Playfair Display', serif;
-  --font-heading: 'Playfair Display', serif;
-  --font-body: 'Lora', serif;
+  --font-display: 'Futura', 'Century Gothic', 'Apple SD Gothic Neo', sans-serif;
+  --font-heading: 'Futura', 'Century Gothic', 'Apple SD Gothic Neo', sans-serif;
+  --font-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 html { scroll-behavior: smooth; }
@@ -203,10 +203,10 @@ nav.scrolled { padding: 0; }
 .hero-logo-wrap {
   width: min(720px, 52vh);
   height: min(720px, 52vh);
-  border-radius: 50%;
+  border-radius: 0;
   overflow: hidden;
   margin-bottom: 16px;
-  animation: logoFloat 4s ease-in-out infinite;
+  animation: none;
   position: relative;
   z-index: 1;
   flex-shrink: 0;
@@ -903,9 +903,9 @@ footer p {
     padding: 0;
     border-right: none;
     border-bottom: 1px solid rgba(255,255,255,0.08);
-    background: rgba(8,8,8,0.97);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    background: rgba(10,10,10,0.55);
+    backdrop-filter: saturate(180%) blur(18px);
+    -webkit-backdrop-filter: saturate(180%) blur(18px);
     z-index: 1000;
   }
 
@@ -1152,6 +1152,9 @@ section#gallery.spa-active {
   cursor: zoom-in;
   background: #000;
 }
+      <button class="gal-arrow gal-arrow-left" onclick="navFilmstrip(-1)" aria-label="Previous">&#10094;</button>
+      <button class="gal-arrow gal-arrow-right" onclick="navFilmstrip(1)" aria-label="Next">&#10095;</button>
+
 .gallery-featured-caption {
   display: none;
 }
@@ -1619,10 +1622,10 @@ section#gallery.grid-view.spa-active { overflow-y: auto !important; height: auto
       <svg class="icon-filled" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
       <span class="nav-label">Gallery</span>
     </a></li>
-    <li><a href="#about" onclick="showPage('about'); return false;" data-tip="About">
+    <li><a href="#about" onclick="showPage('about'); return false;" data-tip="Bio">
       <svg class="icon-outline" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
       <svg class="icon-filled" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7z"/></svg>
-      <span class="nav-label">About</span>
+      <span class="nav-label">Bio</span>
     </a></li>
     <li><a href="#merch" onclick="showPage('merch'); return false;" data-tip="Merch">
       <svg class="icon-outline" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/></svg>
@@ -1751,13 +1754,13 @@ section#gallery.grid-view.spa-active { overflow-y: auto !important; height: auto
       <div>
         <h3 style="font-size:14px; letter-spacing:2px; text-transform:uppercase; margin-bottom:20px; font-family:var(--font-display);">Get in Touch</h3>
         <p style="color:var(--cream); font-size:13px; line-height:1.8; margin-bottom:24px;">Interested in a painting, a commission, or showing my work? I'd love to hear from you. Send me a message and I'll get back to you soon.</p>
-        <p style="color:var(--cream); font-size:13px; margin-bottom:8px;">wrightericson@bellsouth.net</p>
+        
         <p style="color:rgba(255,248,240,0.4); font-size:12px; letter-spacing:1px; margin-top:24px;">Based in Georgia</p>
       </div>
 
       <!-- Contact Form -->
       <div>
-        <form id="contactForm" class="contact-form" action="https://formsubmit.co/wrightericson@bellsouth.net" method="POST">
+        <form id="contactForm" class="contact-form" action="https://formsubmit.co/wrightmusing@gmail.com" method="POST">
           <input type="hidden" name="_subject" value="New message from EricksonWright.com">
           <input type="hidden" name="_template" value="box">
 
@@ -2472,7 +2475,7 @@ function showToast(msg) {
     var data = new FormData(form);
     data.append('_subject', 'New message from Erickson Wright Art.com');
     data.append('_template', 'box');
-    fetch('https://formsubmit.co/ajax/wrightericson@bellsouth.net', {
+    fetch('https://formsubmit.co/ajax/wrightmusing@gmail.com', {
       method: 'POST',
       body: data,
       headers: { 'Accept': 'application/json' }
@@ -2485,14 +2488,14 @@ function showToast(msg) {
     .catch(function() {
       btn.textContent = 'Send It';
       btn.disabled = false;
-      alert('Something went wrong — email wrightericson@bellsouth.net directly.');
+      alert('Something went wrong — email wrightmusing@gmail.com directly.');
     });
   });
 })();
 
 // ===== TYPEWRITER =====
 (function() {
-  var text = 'Original Art • Prints • Merch • Comics';
+  var text = 'Original Paintings by Sandy Erickson Wright';
   var el = document.getElementById('heroTypewriter');
   var cursor = document.querySelector('.tw-cursor');
   if (!el) return;
@@ -2530,7 +2533,7 @@ function revealMailingForm() {
     fd.append('_subject', 'New Mailing List Signup — Erickson Wright Art');
     fd.append('_template', 'box');
     fd.append('_captcha', 'false');
-    fetch('https://formsubmit.co/ajax/wrightericson@bellsouth.net', {
+    fetch('https://formsubmit.co/ajax/wrightmusing@gmail.com', {
       method: 'POST', body: fd, headers: { 'Accept': 'application/json' }
     }).then(function() {
       document.getElementById('mailingFormWrap').style.display = 'none';
@@ -2562,7 +2565,7 @@ function revealMerchMailingForm() {
     fd.append('_subject', 'New Mailing List Signup — Erickson Wright Art');
     fd.append('_template', 'box');
     fd.append('_captcha', 'false');
-    fetch('https://formsubmit.co/ajax/wrightericson@bellsouth.net', {
+    fetch('https://formsubmit.co/ajax/wrightmusing@gmail.com', {
       method: 'POST', body: fd, headers: { 'Accept': 'application/json' }
     }).then(function() {
       document.getElementById('mailingFormWrapMerch').style.display = 'none';
@@ -2626,5 +2629,75 @@ function saveGalleryImage() {
 }
 </script>
 
+
+<style>
+/* Gallery arrows */
+.gal-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  background: rgba(0,0,0,0.45);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 50%;
+  width: 48px; height: 48px;
+  font-size: 22px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.gallery-featured-wrap:hover .gal-arrow,
+.gal-arrow:focus { opacity: 1; }
+.gal-arrow-left { left: 16px; }
+.gal-arrow-right { right: 16px; }
+.gal-arrow:hover { background: rgba(0,0,0,0.7); border-color: rgba(255,255,255,0.4); }
+
+/* Sticky footer for short pages */
+.page-section { display: flex; flex-direction: column; min-height: 100vh; }
+.page-section > footer, footer { margin-top: auto; }
+
+/* Mobile arrow visibility */
+@media (max-width: 768px) {
+  .gal-arrow { opacity: 0.7; width: 36px; height: 36px; font-size: 18px; }
+  .gal-arrow-left { left: 6px; }
+  .gal-arrow-right { right: 6px; }
+}
+</style>
+
+<script>
+// Keyboard arrow navigation for gallery
+document.addEventListener('keydown', function(e) {
+  var gallery = document.getElementById('gallery');
+  if (!gallery || !gallery.classList.contains('spa-active')) return;
+  if (document.querySelector('.gallery-grid.spa-active')) return;
+  if (e.key === 'ArrowRight' || e.key === 'Right') { navFilmstrip(1); e.preventDefault(); }
+  if (e.key === 'ArrowLeft' || e.key === 'Left') { navFilmstrip(-1); e.preventDefault(); }
+});
+
+// Touch swipe navigation for gallery
+(function() {
+  var startX = 0, startY = 0, tracking = false;
+  var wrap = document.querySelector('.gallery-featured-wrap');
+  if (!wrap) return;
+  wrap.addEventListener('touchstart', function(e) {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+    tracking = true;
+  }, {passive: true});
+  wrap.addEventListener('touchend', function(e) {
+    if (!tracking) return;
+    tracking = false;
+    var dx = e.changedTouches[0].clientX - startX;
+    var dy = e.changedTouches[0].clientY - startY;
+    if (Math.abs(dx) < 50 || Math.abs(dy) > Math.abs(dx)) return;
+    if (dx < 0) navFilmstrip(1);
+    else navFilmstrip(-1);
+  }, {passive: true});
+})();
+</script>
 </body>
 </html>
