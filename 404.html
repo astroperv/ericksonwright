@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"></head>
+<body>
+<script>
+  var path = window.location.pathname;
+  var seg = path.split('/').filter(Boolean);
+  if (seg.length > 0) {
+    var page = seg[0];
+    if (seg.length === 1) {
+      window.location.replace('/?p=' + page);
+    } else if (seg[0] === 'gallery' && seg[1]) {
+      window.location.replace('/?p=gallery&painting=' + seg[1]);
+    } else {
+      window.location.replace('/');
+    }
+  } else {
+    window.location.replace('/');
+  }
+</script>
+</body>
+</html>
