@@ -1,844 +1,1652 @@
-<!-- ERICKSON WRIGHT — Folk Art on Found Surfaces
-     Single-file SPA built from ryryart.com template
-     Architecture: Iframe-based SPA (no framework, no build step)
--->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  
-  <!-- Open Graph Meta Tags -->
-  <meta property="og:title" content="Erickson Wright — Folk Art on Found Surfaces">
-  <meta property="og:description" content="Original folk art painted on reclaimed windows, doors & wood. Cows, chickens, pears, trees & more.">
+<meta charset="UTF-8">
+  <meta property="og:title" content="Erickson Wright — Folk Art, Prints &amp; Merch">
+  <meta property="og:description" content="Art is the meat of my soul. Uncut. Atlanta-born. Original paintings, prints &amp; merch.">
   <meta property="og:url" content="https://ericksonwright.com">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="images/TheGangs.jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-
-  <!-- Twitter Card Meta Tags -->
+  <meta property="og:image" content="https://ericksonwright.com/og-preview.png">
+  <meta property="og:image:width" content="600">
+  <meta property="og:image:height" content="600">
+  <meta property="og:image:type" content="image/png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="images/TheGangs.jpg">
-  <meta name="twitter:title" content="Erickson Wright — Folk Art on Found Surfaces">
-  <meta name="twitter:description" content="Original folk art painted on reclaimed windows, doors & wood.">
+  <meta name="twitter:site" content="@ericksonwright">
+  <meta name="twitter:image" content="https://ericksonwright.com/og-preview.png">
+  <meta name="twitter:title" content="Erickson Wright — Folk Art">
+  <meta name="twitter:description" content="Art is the meat of my soul. Uncut.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Erickson Wright — Folk Art on Found Surfaces</title>
+<meta name="description" content="Original paintings, signed prints, and merch by Erickson Wright. Raw urban art with attitude.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Lora:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-  <!-- Standard Meta Tags -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Erickson Wright — Folk Art on Found Surfaces</title>
-  <meta name="description" content="Original folk art by Erickson Wright. Paintings on reclaimed windows, doors & wood. Cows, chickens, pears, trees & more.">
-  
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lora:wght@400;500;700&display=swap" rel="stylesheet">
-  
-  <!-- INLINE STYLES BLOCK -->
-  <style>
-    /* ====================================
-       RESET & ROOT VARIABLES
-       ==================================== */
-    
-    *, *::before, *::after { 
-      margin: 0; 
-      padding: 0; 
-      box-sizing: border-box; 
-    }
-    
-    :root {
-      --black: #0a0a0a;
-      --dark: #111111;
-      --gray: #1a1a1a;
-      --light-gray: #2a2a2a;
-      --white: #fff8f0;
-      --cream: #d4c5b0;
-      --red: #c8872e;
-      --teal: #5a7c65;
-      --yellow: #d4a84b;
-      --font-display: 'Playfair Display', serif;
-      --font-heading: 'Playfair Display', serif;
-      --font-body: 'Lora', serif;
-    }
-    
-    html { scroll-behavior: smooth; }
-    
-    body {
-      background: var(--black);
-      color: var(--white);
-      font-family: var(--font-body);
-      font-size: 14px;
-      line-height: 1.6;
-      overflow-x: hidden;
-      padding-left: 64px;
-    }
-    
-    /* NOISE OVERLAY - fixed texture across entire viewport */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0; 
-      left: 0; 
-      width: 100%; 
-      height: 100%;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 9999;
-    }
-    
-    ::selection { background: var(--red); color: var(--white); }
-    a { color: var(--white); text-decoration: none; }
-    
-    /* ====================================
-       NAVIGATION (DESKTOP: 64px LEFT SIDEBAR)
-       ==================================== */
-    
-    nav {
-      position: fixed;
-      top: 0; 
-      left: 0;
-      width: 64px; 
-      height: 100vh;
-      z-index: 1000;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
-      padding-top: 20px;
-      background: rgba(10, 10, 10, 0.92);
-      backdrop-filter: blur(12px);
-      transition: none;
-    }
-    
-    nav.scrolled { padding: 0; }
-    
-    .nav-links {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      list-style: none;
-      align-items: center;
-    }
-    
-    .nav-links a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 64px;
-      height: 60px;
-      color: #ffffff;
-      position: relative;
-      transition: color 0.2s;
-    }
-    
-    .nav-links a::after { display: none; }
-    .nav-links a:hover { color: #ffffff; }
-    
-    /* Tooltip on hover */
-    .nav-links a[data-tip]::before {
-      content: attr(data-tip);
-      position: absolute;
-      left: 68px;
-      background: #1a1a1a;
-      color: #fff;
-      font-family: var(--font-body);
-      font-size: 11px;
-      letter-spacing: 1px;
-      padding: 4px 10px;
-      border-radius: 3px;
-      white-space: nowrap;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.15s;
-      border: 1px solid rgba(200, 135, 46, 0.15);
-    }
-    .nav-links a[data-tip]:hover::before { opacity: 1; }
-    
-    .nav-logo { display: none !important; }
-    .nav-label { display: none; }
-    
-    .nav-hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      z-index: 1001;
-      padding: 4px;
-    }
-    .nav-hamburger span {
-      width: 26px; 
-      height: 2px;
-      background: var(--white);
-      transition: all 0.3s;
-      display: block;
-    }
-    
-    /* ====================================
-       HERO SECTION
-       ==================================== */
-    
-    .hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      overflow: hidden;
-    }
-    
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0; 
-      left: 0;
-      width: 100%; 
-      height: 100%;
-      background: radial-gradient(circle at 50% 50%, rgba(200, 135, 46, 0.1) 0%, transparent 100%);
-      pointer-events: none;
-    }
-    
-    .hero::after {
-      content: '';
-      position: absolute;
-      top: 0; 
-      left: 0;
-      width: 100%; 
-      height: 100%;
-      background-image: 
-        linear-gradient(90deg, rgba(0,0,0,0.1) 1px, transparent 1px),
-        linear-gradient(rgba(0,0,0,0.1) 1px, transparent 1px);
-      background-size: 80px 80px;
-      opacity: 0.05;
-      pointer-events: none;
-    }
-    
-    .hero-logo-wrap {
-      width: 120px;
-      height: 120px;
-      margin-bottom: 30px;
-      position: relative;
-      z-index: 2;
-    }
-    
-    .hero-logo {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-    
-    .hero-logo-fallback {
-      font-size: 64px;
-      font-weight: bold;
-      font-family: var(--font-display);
-      letter-spacing: 8px;
-    }
-    
-    .hero h1 {
-      font-size: 72px;
-      font-family: var(--font-display);
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-      line-height: 1;
-    }
-    
-    .hero-tagline {
-      font-size: 16px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.7);
-      margin-bottom: 60px;
-      font-weight: 400;
-    }
-    
-    .tw-cursor {
-      display: inline-block;
-      width: 2px;
-      height: 1em;
-      background: var(--red);
-      animation: blink 0.6s infinite;
-      margin-left: 4px;
-    }
-    
-    @keyframes blink {
-      0%, 50% { opacity: 1; }
-      51%, 100% { opacity: 0; }
-    }
-    
-    .hero-cta {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-      margin-top: 40px;
-    }
-    
-    .btn {
-      padding: 14px 32px;
-      border: 2px solid var(--red);
-      background: transparent;
-      color: var(--white);
-      font-family: var(--font-body);
-      font-size: 13px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      border-radius: 2px;
-    }
-    
-    .btn-primary {
-      background: var(--red);
-      color: var(--white);
-    }
-    
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 16px rgba(200, 135, 46, 0.3);
-    }
-    
-    /* Email capture form */
-    #mailingFormWrap { display: none !important; }
-    
-    .email-capture-form {
-      display: flex;
-      gap: 10px;
-      max-width: 400px;
-      margin: 0 auto;
-    }
-    
-    .email-capture-form input {
-      flex: 1;
-      padding: 12px 16px;
-      background: rgba(26, 26, 26, 0.8);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: var(--white);
-      font-family: var(--font-body);
-      font-size: 13px;
-      outline: none;
-    }
-    
-    .email-capture-form button {
-      padding: 12px 24px;
-      background: var(--red);
-      border: none;
-      color: var(--white);
-      font-family: var(--font-body);
-      font-size: 13px;
-      letter-spacing: 1px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    
-    .email-capture-form button:hover { background: #a36e1f; }
-    
-    .email-capture-thanks {
-      color: rgba(255, 255, 255, 0.6);
-      font-size: 13px;
-      letter-spacing: 1px;
-      margin-top: 12px;
-    }
-    
-    /* ====================================
-       SECTIONS (SPA PAGE SYSTEM)
-       ==================================== */
-    
-    .page-section { 
-      display: none;
-      padding: 100px 48px;
-    }
-    
-    .page-section.spa-active { 
-      display: block; 
-      animation: spafade 0.25s ease;
-    }
-    
-    section#home.spa-active { 
-      display: flex; 
-    }
-    
-    @keyframes spafade {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    
-    /* ====================================
-       GALLERY SECTION
-       ==================================== */
-    
-    section#gallery.spa-active {
-      display: block;
-      padding: 0;
-      max-width: 100%;
-    }
+:root {
+  --black: #0a0a0a;
+  --dark: #111111;
+  --gray: #1a1a1a;
+  --light-gray: #2a2a2a;
+  --white: #fff8f0;
+  --cream: #d4c5b0;
+  --red: #c8872e;
+  --teal: #5a7c65;
+  --yellow: #d4a84b;
+  --font-display: 'Playfair Display', serif;
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Lora', serif;
+}
 
-    /* CRITICAL: Global grid-view rule — NOT inside a media query */
-    section#gallery.grid-view.spa-active {
-      overflow-y: auto !important;
-      height: auto !important;
-      min-height: 100vh;
-      display: block !important;
-      padding: 0 !important;
-    }
-    
-    .gallery {
-      width: 100%;
-      height: 100vh;
-      overflow: hidden;
-      position: fixed;
-      top: 0;
-      left: 64px;
-      right: 0;
-      background: var(--black);
-      display: flex;
-      flex-direction: column;
-    }
-    
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 16px;
-      padding: 40px;
-      overflow-y: auto;
-      height: 100%;
-      max-height: 100vh;
-    }
-    
-    .gallery-item {
-      position: relative;
-      overflow: hidden;
-      aspect-ratio: 1;
-      cursor: pointer;
-      border-radius: 2px;
-    }
-    
-    .gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.3s ease;
-    }
-    
-    .gallery-item img:hover {
-      transform: scale(1.07);
-    }
-    
-    .gallery-item .img-placeholder {
-      width: 100%;
-      height: 100%;
-      background: var(--gray);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: rgba(255, 255, 255, 0.3);
-    }
-    
-    .gallery-item::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.3);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-    
-    .gallery-item:hover::after {
-      opacity: 1;
-    }
-    
-    .gallery-item .item-info {
-      position: absolute;
-      bottom: 16px;
-      left: 16px;
-      right: 16px;
-      color: var(--white);
-      z-index: 2;
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    
-    .gallery-item:hover .item-info {
-      opacity: 1;
-    }
-    
-    .gallery-item h3 {
-      font-size: 14px;
-      font-family: var(--font-display);
-      letter-spacing: 1px;
-      margin: 0;
-    }
-    
-    .gallery-item p {
-      font-size: 11px;
-      color: rgba(255, 255, 255, 0.7);
-      margin: 4px 0 0 0;
-    }
-    
-    /* Featured Gallery View */
-    .gallery-featured-wrap {
-      position: fixed;
-      top: 0;
-      left: 64px;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.95);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 100;
-      display: none;
-    }
-    
-    .gallery-featured-img {
-      max-width: 90%;
-      max-height: 85%;
-      object-fit: contain;
-    }
-    
-    .gallery-featured-caption {
-      position: absolute;
-      bottom: 40px;
-      left: 0;
-      right: 0;
-      text-align: center;
-      color: rgba(255, 255, 255, 0.8);
-    }
-    
-    .gallery-featured-caption h3 {
-      font-size: 18px;
-      font-family: var(--font-display);
-      letter-spacing: 2px;
-      margin: 0;
-    }
-    
-    .gallery-featured-caption p {
-      font-size: 13px;
-      margin: 8px 0 0 0;
-    }
-    
-    /* Filmstrip */
-    #galleryFilmstrip {
-      display: flex;
-      gap: 12px;
-      padding: 20px 40px;
-      overflow-x: auto;
-      background: rgba(10, 10, 10, 0.7);
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    
-    #galleryFilmstrip::-webkit-scrollbar {
-      height: 3px;
-    }
-    
-    #galleryFilmstrip::-webkit-scrollbar-thumb {
-      background: var(--red);
-      border-radius: 2px;
-    }
-    
-    .film-thumb {
-      width: 80px;
-      height: 80px;
-      flex-shrink: 0;
-      cursor: pointer;
-      border: 2px solid transparent;
-      opacity: 0.6;
-      transition: all 0.3s ease;
-      object-fit: cover;
-    }
-    
-    .film-thumb:hover {
-      opacity: 1;
-    }
-    
-    .film-thumb.film-active {
-      border-color: var(--red);
-      opacity: 1;
-    }
-    
-    /* Gallery Actions */
-    .gallery-actions {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      display: flex;
-      gap: 12px;
-      z-index: 200;
-    }
-    
-    .gallery-back-btn,
-    .gallery-action-btn {
-      width: 44px;
-      height: 44px;
-      background: rgba(0, 0, 0, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: var(--white);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s;
-      border-radius: 2px;
-    }
-    
-    .gallery-back-btn:hover,
-    .gallery-action-btn:hover {
-      background: rgba(0, 0, 0, 0.8);
-      border-color: var(--red);
-    }
-    
-    .gallery-price {
-      font-size: 14px;
-      color: var(--red);
-      font-weight: bold;
-    }
-    
-    .gallery-buy-btn {
-      display: inline-block;
-      padding: 10px 20px;
-      background: var(--red);
-      color: var(--white);
-      text-decoration: none;
-      font-size: 12px;
-      letter-spacing: 1px;
-      margin-left: 16px;
-      transition: background 0.3s;
-    }
-    
-    .gallery-buy-btn:hover {
-      background: #a36e1f;
-    }
-    
-    /* ====================================
-       ABOUT, MERCH, CONNECT SECTIONS
-       ==================================== */
-    
-    section#about h2,
-    section#merch h2,
-    section#connect h2 {
-      font-size: 48px;
-      font-family: var(--font-display);
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      margin-bottom: 40px;
-    }
-    
-    .merch {
-      padding: 100px 48px;
-    }
-    
-    .contact-form {
-      max-width: 400px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    
-    .contact-form input,
-    .contact-form textarea {
-      padding: 12px 16px;
-      background: var(--gray);
-      border: 1px solid var(--light-gray);
-      color: var(--white);
-      font-family: var(--font-body);
-      font-size: 13px;
-      outline: none;
-    }
-    
-    .contact-form input:focus,
-    .contact-form textarea:focus {
-      border-color: var(--red);
-    }
-    
-    .contact-success {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 400px;
-      text-align: center;
-      color: rgba(255, 255, 255, 0.7);
-    }
-    
-    /* ====================================
-       LIGHTBOX
-       ==================================== */
-    
-    .lightbox {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.95);
-      z-index: 2000;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .lightbox.active {
-      display: flex;
-    }
-    
-    .lightbox img {
-      max-width: 90%;
-      max-height: 90%;
-      object-fit: contain;
-    }
-    
-    .lightbox-caption {
-      position: absolute;
-      bottom: 30px;
-      color: rgba(255, 255, 255, 0.7);
-      font-size: 13px;
-      text-align: center;
-    }
-    
-    /* Toast notifications */
-    .copy-toast {
-      position: fixed;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%) translateY(100px);
-      background: rgba(0, 0, 0, 0.8);
-      color: var(--white);
-      padding: 12px 24px;
-      border-radius: 2px;
-      font-size: 12px;
-      letter-spacing: 1px;
-      transition: transform 0.3s ease;
-      z-index: 3000;
-      pointer-events: none;
-    }
-    
-    .copy-toast.show {
-      transform: translateX(-50%) translateY(0);
-    }
-    
-    /* ====================================
-       RESPONSIVE: MOBILE (≤768px)
-       ==================================== */
-    
-    @media (max-width: 768px) {
-      body {
-        padding-left: 0;
-        padding-top: 60px;
-      }
-      
-      nav {
-        position: fixed;
-        top: 0;
-        bottom: auto;
-        left: 0;
-        width: 100%;
-        height: 60px;
-        flex-direction: row;
-        justify-content: space-around;
-        padding-top: 0;
-        z-index: 1000;
-      }
-      
-      .nav-links {
-        flex-direction: row;
-        justify-content: space-around;
-        width: 100%;
-        height: 100%;
-      }
-      
-      .nav-links a {
-        width: auto;
-        height: 60px;
-        flex: 1;
-      }
-      
-      .nav-hamburger {
-        display: none;
-      }
-      
-      .hero h1 {
-        font-size: 48px;
-      }
-      
-      .hero-tagline {
-        font-size: 13px;
-      }
-      
-      section { 
-        padding: 80px 24px; 
-      }
-      
-      .gallery {
-        left: 0;
-      }
-      
-      .gallery-grid {
-        grid-template-columns: repeat(2, 1fr);
-        padding: 20px;
-        gap: 12px;
-      }
-      
-      .gallery-featured-wrap {
-        left: 0;
-      }
-      
-      #galleryFilmstrip {
-        padding: 16px 20px;
-        gap: 10px;
-      }
-      
-      .film-thumb {
-        width: 60px;
-        height: 60px;
-      }
-    }
-    
-    @media (max-width: 480px) {
-      .hero h1 {
-        font-size: 36px;
-      }
-      
-      section {
-        padding: 60px 16px;
-      }
-      
-      .gallery-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  padding-left: 96px;
+}
+
+/* NOISE OVERLAY */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+}
+
+::selection { background: var(--red); color: var(--white); }
+a { color: var(--white); text-decoration: none; }
+
+/* ========================
+   NAV
+======================== */
+nav {
+  position: fixed;
+  top: 0; left: 0;
+  width: 96px; height: 100vh;
+  z-index: 1000;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 0;
+  background: rgba(10,10,10,0.92);
+  backdrop-filter: blur(12px);
+  transition: none;
+  border-right: 1px solid rgba(255,255,255,0.18);
+}
+
+@media (max-width: 768px) {
+  body { padding-left: 64px; }
+  nav { width: 64px; background: rgba(0,0,0,0.15) !important; backdrop-filter: saturate(180%) blur(16px); -webkit-backdrop-filter: saturate(180%) blur(16px); border-right: 1px solid rgba(255,255,255,0.1); }
+  section#gallery.spa-active { background: transparent !important; }
+  body.gallery-grid-active { padding-left: 0 !important; }
+  .nav-links a { width: 64px; height: 60px; }
+  .nav-links a svg { width: 24px !important; height: 24px !important; }
+  .nav-links a[data-tip]::before { left: 68px; }
+  .connect-form-block { margin-top: 48px; }
+}
+
+nav.scrolled { padding: 0; }
+
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  list-style: none;
+  align-items: center;
+  flex: 1;
+  justify-content: space-evenly;
+}
+
+.nav-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 96px;
+  height: 90px;
+  color: #ffffff;
+  position: relative;
+  transition: color 0.2s;
+}
+
+.nav-links a svg { width: 26px; height: 26px; }
+
+.nav-links a::after { display: none; }
+.nav-links a:hover { color: #ffffff; }
+
+/* Tooltip on hover */
+.nav-links a[data-tip]::before {
+  content: attr(data-tip);
+  position: absolute;
+  left: 100px;
+  background: #1a1a1a;
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 1px;
+  padding: 4px 10px;
+  border-radius: 3px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s;
+  border: 1px solid rgba(240,232,216,0.1);
+}
+.nav-links a[data-tip]:hover::before { opacity: 1; }
+
+.nav-logo { display: none !important; }
+
+.nav-label { display: none; }
+
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  z-index: 1001;
+  padding: 4px;
+}
+.nav-hamburger span {
+  width: 26px; height: 2px;
+  background: var(--white);
+  transition: all 0.3s;
+  display: block;
+}
+
+/* ========================
+   HERO
+======================== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  padding: 24px 24px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ambient glow */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: none;
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  font-family: var(--font-display);
+  font-size: clamp(100px, 22vw, 280px);
+  color: rgba(240,232,216,0.022);
+  letter-spacing: -6px;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.hero-logo-wrap {
+  width: min(720px, 52vh);
+  height: min(720px, 52vh);
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 16px;
+  animation: logoFloat 4s ease-in-out infinite;
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+.hero-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.hero-logo-fallback {
+  width: 720px;
+  height: 720px;
+  border-radius: 50%;
+  background: var(--gray);
+  margin-bottom: 32px;
+  animation: logoFloat 4s ease-in-out infinite;
+  box-shadow: 0 0 50px rgba(204,41,54,0.35);
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 32px;
+  color: var(--red);
+}
+
+@keyframes logoFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.hero h1 {
+  display: none;
+}
+
+.hero-tagline {
+  font-family: var(--font-heading);
+  font-size: clamp(16px, 2.2vw, 24px);
+  letter-spacing: 7px;
+  color: #ffffff !important;
+  opacity: 1;
+  margin-bottom: 52px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* ========================
+   BUTTONS
+======================== */
+.btn {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  letter-spacing: 3px;
+  padding: 14px 38px;
+  border: 2px solid var(--white);
+  background: transparent;
+  color: var(--white);
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+.btn:hover {
+  background: var(--white);
+  color: var(--black);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(240,232,216,0.12);
+}
+
+.btn-primary {
+  background: var(--red);
+  border-color: var(--red);
+  color: var(--white);
+}
+.btn-primary:hover {
+  background: #e0303e;
+  border-color: #e0303e;
+  color: var(--white);
+}
+.btn-outline {
+  background: #000;
+  border-color: rgba(255,255,255,0.7);
+  color: var(--white);
+}
+.btn-outline:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: var(--white);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
+/* ========================
+   SECTIONS
+======================== */
+section { padding: 100px 48px; }
+
+.section-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--red);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  opacity: 0.9;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(38px, 5.5vw, 68px);
+  line-height: 0.95;
+  margin-bottom: 8px;
+}
+
+.section-subtitle {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: rgba(255,255,255,0.55);
+  opacity: 1;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 48px;
+}
+
+/* ========================
+   GALLERY
+======================== */
+.gallery {
+  background: var(--dark);
+  border-top: 1px solid var(--light-gray);
+  border-bottom: 1px solid var(--light-gray);
+}
+
+/* gallery filter removed */
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1;
+  cursor: pointer;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+  display: block;
+}
+
+.gallery-item .img-placeholder {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s ease;
+  display: block;
+}
+
+.gallery-item:hover img,
+.gallery-item:hover .img-placeholder { transform: scale(1.07); }
+
+.gallery-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(10,10,10,0.85) 0%, transparent 55%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.gallery-item:hover::after { opacity: 1; }
+
+.gallery-item .item-info {
+  position: absolute;
+  bottom: 16px; left: 16px; right: 16px;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: all 0.35s ease;
+}
+.gallery-item:hover .item-info {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.item-info h3 {
+  font-family: var(--font-display);
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+.item-info span {
+  font-size: 10px;
+  color: rgba(255,255,255,0.75);
+  opacity: 1;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* ========================
+   LIGHTBOX
+======================== */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(0,0,0,0.96);
+  justify-content: center;
+  align-items: center;
+  padding: 60px;
+  cursor: zoom-out;
+}
+.lightbox.active { display: flex; }
+
+.lightbox img {
+  max-width: 85vw;
+  max-height: 82vh;
+  object-fit: contain;
+  border: 1px solid var(--light-gray);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 24px; right: 32px;
+  font-family: var(--font-heading);
+  font-size: 28px;
+  color: var(--white);
+  cursor: pointer;
+  background: none;
+  border: none;
+  letter-spacing: 2px;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+.lightbox-close:hover { opacity: 1; }
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-heading);
+  font-size: 28px;
+  color: var(--white);
+  background: rgba(10,10,10,0.7);
+  border: 1px solid var(--light-gray);
+  padding: 14px 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  z-index: 2;
+}
+.lightbox-nav:hover { border-color: var(--white); background: rgba(10,10,10,0.9); }
+.lightbox-prev { left: 20px; }
+.lightbox-next { right: 20px; }
+
+.lightbox-caption {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-display);
+  font-size: 14px;
+  color: var(--white);
+  opacity: 0.6;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* ========================
+   ABOUT
+======================== */
+.about-wrap {
+  max-width: 880px;
+}
+
+.about-text p {
+  font-size: 14px;
+  line-height: 1.9;
+  color: #ffffff;
+  margin-bottom: 20px;
+  opacity: 1;
+}
+
+
+.about-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  margin-top: 32px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.about-tags::-webkit-scrollbar { display: none; }
+
+.tag {
+  font-family: var(--font-heading);
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  padding: 6px 12px;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.6);
+  opacity: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ========================
+   MERCH
+======================== */
+.merch { background: var(--dark); }
+
+.merch-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.merch-card {
+  background: var(--gray);
+  border: 1px solid var(--light-gray);
+  padding: 32px 24px;
+  text-align: center;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  display: block;
+  color: var(--white);
+  text-decoration: none;
+}
+
+.merch-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 3px;
+  background: var(--red);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s;
+}
+.merch-card:hover::before { transform: scaleX(1); }
+.merch-card:hover {
+  border-color: var(--teal);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.5);
+}
+
+.merch-icon { display: block; }
+
+.merch-card h3 {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+
+.merch-card p {
+  font-size: 11px;
+  color: rgba(255,255,255,0.7);
+  opacity: 1;
+  margin-bottom: 20px;
+  line-height: 1.7;
+}
+
+.coming-soon {
+  font-family: var(--font-heading);
+  font-size: 12px;
+  letter-spacing: 2px;
+  padding: 8px 22px;
+  border: 1px solid var(--red);
+  color: var(--white);
+  opacity: 0.6;
+  display: inline-block;
+}
+
+.nav-bubble {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 8px;
+  height: 8px;
+  background: var(--red);
+  border-radius: 50%;
+  display: block;
+}
+
+.merch-coming-soon-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-heading);
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+
+.merch-cs-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--red);
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+.merch-card-cs {
+  pointer-events: auto;
+  opacity: 0.75;
+  text-decoration: none;
+  display: block;
+}
+
+.merch-cs-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: var(--red);
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: 10px;
+  letter-spacing: 2px;
+  padding: 4px 10px;
+  text-transform: uppercase;
+}
+
+.merch-cs-link {
+  display: block;
+  font-size: 10px;
+  font-family: var(--font-body);
+  color: rgba(255,255,255,0.3);
+  margin-top: 16px;
+  letter-spacing: 1px;
+}
+
+/* ========================
+   VIDEOS
+======================== */
+.videos-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.video-placeholder {
+  background: var(--gray);
+  border: 1px solid var(--light-gray);
+  aspect-ratio: 16/9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+.video-placeholder:hover { border-color: var(--red); }
+.video-placeholder:hover::after { opacity: 1; }
+
+.video-placeholder::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(204,41,54,0.0) 0%, rgba(204,41,54,0.0) 100%);
+  transition: background 0.5s ease, opacity 0.5s ease;
+  opacity: 0;
+}
+.video-placeholder:hover::after {
+  background: linear-gradient(135deg, rgba(204,41,54,0.35) 0%, rgba(0,180,160,0.15) 60%, transparent 100%);
+  opacity: 1;
+}
+
+.video-thumb-text {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.35);
+  opacity: 1;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 20px;
+}
+
+/* ========================
+   COMICS
+======================== */
+.comics { background: var(--dark); }
+
+.comics-preview {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 36px;
+}
+
+.comics-panel {
+  background: var(--gray);
+  border: 1px solid var(--light-gray);
+  flex: 1;
+  aspect-ratio: 2/3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.comics-panel-text {
+  font-family: var(--font-display);
+  font-size: 13px;
+  color: var(--cream);
+  opacity: 0.2;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* ========================
+   CONNECT
+======================== */
+/* Desktop connect: two-column layout */
+@media (min-width: 769px) {
+  .connect-layout {
+    display: flex;
+    gap: 60px;
+    align-items: flex-start;
+  }
+  .connect-layout .social-links {
+    flex: 0 0 280px;
+  }
+  .connect-layout .connect-form-block {
+    flex: 1;
+    border-top: none;
+    padding-top: 0;
+    margin-top: 0;
+  }
+}
+
+.connect-section-heading {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 2.5vw, 36px);
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  line-height: 1;
+  margin: 0 0 28px 0;
+}
+
+.social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 500px;
+}
+
+.social-link {
+  font-family: var(--font-body);
+  font-size: 13px;
+  letter-spacing: 2px;
+  padding: 14px 20px;
+  border: 1px solid var(--light-gray);
+  color: rgba(255,255,255,0.8);
+  opacity: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.25s;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.social-link:hover {
+  border-color: var(--white);
+  opacity: 1;
+  color: var(--white);
+  transform: translateX(4px);
+}
+.social-link.disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.social-icon { font-size: 16px; }
+
+/* ========================
+   FOOTER
+======================== */
+footer {
+  background: var(--dark);
+  border-top: 1px solid var(--light-gray);
+  padding: 40px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+footer p {
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+  opacity: 1;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* ========================
+   REVEAL ANIMATION
+======================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========================
+   RESPONSIVE
+======================== */
+/* ========================
+   RESPONSIVE — TABLET
+======================== */
+@media (max-width: 1024px) {
+  .merch-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+  .videos-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 900px) {
+  .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+  .merch-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .videos-grid { grid-template-columns: repeat(2, 1fr); }
+  section { padding: 80px 32px; }
+  .hero { padding: 80px 24px 60px; }
+  .hero-logo-wrap { width: 280px; height: 280px; }
+  .hero-logo-fallback { width: 280px; height: 280px; }
+}
+
+/* ========================
+   RESPONSIVE — MOBILE
+   Bottom thumb-nav replaces sidebar
+======================== */
+@media (max-width: 768px) {
+  /* Body: no left pad, add top pad for tab bar */
+  body {
+    padding-left: 0;
+    padding-bottom: 0;
+    padding-top: 60px;
+    font-size: 13px;
+  }
+
+  /* ---- NAV: become top tab bar ---- */
+  nav {
+    position: fixed;
+    top: 0;
+    bottom: auto;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: stretch;
+    padding: 0;
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    background: rgba(8,8,8,0.97);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    z-index: 1000;
+  }
+
+  /* Show all nav links as horizontal icons */
+  .nav-links {
+    display: flex !important;
+    flex-direction: row;
+    width: 100%;
+    gap: 0;
+    align-items: stretch;
+  }
+
+  .nav-links li {
+    flex: 1;
+    display: flex;
+  }
+
+  .nav-links a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 60px;
+    gap: 3px;
+    padding: 6px 2px;
+    color: rgba(255,255,255,0.45);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .nav-links a:hover,
+  .nav-links a.active { color: #ffffff; }
+
+  /* Hide text labels under icons */
+  .nav-label {
+    display: none;
+  }
+
+  /* Hide tooltip (we have labels now) */
+  .nav-links a[data-tip]::before { display: none !important; }
+
+  /* Kill the red vertical active indicator on the bottom tab bar */
+  .nav-links li::before { display: none !important; }
+
+  /* Hide hamburger — not needed for bottom nav */
+  .nav-hamburger { display: none !important; }
+
+  /* Hide desktop logo in nav */
+  .nav-logo { display: none !important; }
+
+  /* ---- HERO ---- */
+  .hero {
+    min-height: 100svh;
+    padding: 60px 20px 40px;
+  }
+
+  .hero-logo-wrap {
+    width: 380px;
+    height: 380px;
+  }
+
+  .hero-logo-fallback { width: 380px; height: 380px; }
+
+  .hero-tagline {
+    font-size: clamp(11px, 3.5vw, 16px);
+    letter-spacing: 4px;
+    margin-bottom: 32px;
+  }
+
+  .hero-cta {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 0 20px;
+  }
+
+  .hero-cta .btn {
+    width: 100%;
+    text-align: center;
+    padding: 14px 20px;
+  }
+
+  /* ---- SECTIONS ---- */
+  section { padding: 60px 20px; }
+
+  .section-title { font-size: clamp(32px, 10vw, 54px); }
+
+  /* ---- GALLERY ---- */
+  .gallery-grid { grid-template-columns: 1fr; gap: 3px; }
+  section#gallery.spa-active {
+    position: fixed !important;
+    top: 60px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: auto !important;
+    overflow: hidden;
+    padding: 0;
+    display: block;
+  }
+  /* Filmstrip locked to visible screen bottom — uses env() for home indicator clearance */
+  #gallery .gallery-filmstrip {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    background: #000;
+    height: calc(72px + env(safe-area-inset-bottom, 0px));
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    flex-shrink: 0;
+  }
+  /* Featured image fills all space above filmstrip */
+  #gallery .gallery-featured-wrap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+    flex: none;
+  }
+  /* Show back button on mobile gallery */
+  .gallery-back-btn { display: flex; }
+  /* Hide desktop action buttons on mobile gallery */
+  .gallery-actions { display: none; }
+  /* Prevent touch scroll on gallery featured image */
+  .gallery-featured-wrap { touch-action: pan-x; }
+
+  /* ---- ABOUT ---- */
+  .about-wrap { max-width: 100%; }
+  .about-text p { font-size: 13px; line-height: 1.8; }
+  .about-tags { gap: 8px; }
+  .tag { font-size: 11px; padding: 6px 12px; }
+
+  /* ---- MERCH ---- */
+  .merch-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .merch-card { padding: 24px 16px; }
+
+  /* ---- VIDEOS ---- */
+  .videos-grid { grid-template-columns: 1fr; gap: 12px; }
+
+  /* ---- LIGHTBOX ---- */
+  .lightbox { padding: 16px; }
+  .lightbox img { max-width: 96vw; max-height: 75vh; }
+  .lightbox-prev { left: 6px; padding: 10px 14px; }
+  .lightbox-next { right: 6px; padding: 10px 14px; }
+  .lightbox-close { top: 12px; right: 16px; }
+
+  /* ---- CONNECT ---- */
+  .social-links { max-width: 100%; }
+  .social-link { font-size: 11px; padding: 12px 16px; }
+
+  /* ---- FOOTER ---- */
+  footer {
+    padding: 20px 16px;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+    gap: 0;
+    padding-bottom: 20px;
+  }
+  footer p {
+    font-size: 9px;
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
+}
+
+/* ---- Small phones ---- */
+@media (max-width: 480px) {
+  .gallery-grid { grid-template-columns: 1fr; gap: 2px; }
+  .merch-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .hero-logo-wrap { width: 320px; height: 320px; }
+  .btn { font-size: 14px; letter-spacing: 2px; }
+  .section-title { font-size: clamp(28px, 11vw, 48px); }
+}
+
+
+/* Active nav state */
+.nav-links a.active {
+  color: #ffffff;
+}
+.nav-links a.active::after {
+  display: none;
+}
+.nav-links li {
+  position: relative;
+}
+.nav-links li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 24px;
+  background: var(--red);
+  border-radius: 0 2px 2px 0;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.nav-links li:has(a.active)::before {
+  opacity: 1;
+}
+
+/* Dual icon toggle for active state */
+.nav-links a .icon-outline { display: block; }
+.nav-links a .icon-filled  { display: none;  }
+.nav-links a.active .icon-outline { display: none;  }
+.nav-links a.active .icon-filled  { display: block; }
+.nav-links a.active { color: #ffffff; }
+
+/* ===== SPA PAGE SYSTEM ===== */
+.page-section { display: none; }
+.page-section.spa-active { display: block; animation: spafade 0.25s ease; }
+section#home.spa-active { display: flex; }
+@keyframes spafade { from { opacity: 0; } to { opacity: 1; } }
+
+/* ===== GALLERY FILMSTRIP ===== */
+.gallery .section-inner { padding: 0; max-width: 100%; }
+section#gallery.spa-active {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+  background: #000;
+  overflow: hidden;
+}
+.gallery-featured-wrap {
+  flex: 1 1 auto;
+  width: 100%;
+  background: #000;
+  position: relative;
+  overflow: hidden;
+  min-height: 0;
+}
+.gallery-featured-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  cursor: zoom-in;
+  background: #000;
+}
+.gallery-featured-caption {
+  display: none;
+}
+.gallery-featured-caption h3 {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  letter-spacing: 3px;
+  color: #fff;
+  margin: 0 0 4px;
+}
+.gallery-featured-caption p {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: rgba(255,255,255,0.55);
+  margin: 0;
+}
+.gallery-filmstrip {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  gap: 3px;
+  flex: 0 0 72px;
+  height: 72px;
+  background: #000;
+  padding: 3px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.gallery-filmstrip::-webkit-scrollbar { height: 3px; }
+.gallery-filmstrip::-webkit-scrollbar-thumb { background: var(--red); border-radius: 2px; }
+.film-thumb {
+  flex: 0 0 72px;
+  width: 72px;
+  height: 66px;
+  object-fit: cover;
+  cursor: pointer;
+  opacity: 0.45;
+  transition: opacity 0.15s;
+  scroll-snap-align: start;
+  border: 2px solid transparent;
+}
+.film-thumb:hover { opacity: 0.8; }
+.film-thumb.film-active { opacity: 1; border-color: var(--red); }
+
+/* ===== SHOP LANDING PAGE ===== */
+#shop.spa-active {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  background: #000;
+  min-height: 100vh;
+}
+.shop-landing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 32px 40px;
+  gap: 28px;
+  max-width: 700px;
+  margin: 0 auto;
+  width: 100%;
+}
+.shop-landing-header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.shop-landing-label {
+  font-family: var(--font-body);
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--red);
+}
+.shop-landing-title {
+  font-family: var(--font-heading);
+  font-size: 64px;
+  letter-spacing: 6px;
+  color: var(--white);
+  margin: 0;
+  line-height: 1;
+}
+.shop-landing-medium {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.4);
+}
+.shop-landing-img-link {
+  display: block;
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  cursor: pointer;
+  text-decoration: none;
+}
+.shop-painting-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+.shop-landing-img-link:hover .shop-painting-img {
+  transform: scale(1.02);
+  filter: brightness(0.55);
+}
+.shop-landing-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.shop-landing-img-link:hover .shop-landing-overlay {
+  opacity: 1;
+}
+.shop-overlay-price {
+  font-family: var(--font-heading);
+  font-size: 52px;
+  letter-spacing: 4px;
+  color: #fff;
+}
+.shop-overlay-cta {
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 4px;
+  color: rgba(255,255,255,0.8);
+  text-transform: uppercase;
+}
+.shop-landing-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+.shop-buy-btn {
+  font-size: 15px;
+  padding: 16px 48px;
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+.shop-note {
+  font-family: var(--font-body);
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.25);
+  text-align: center;
+}
+@media (max-width: 768px) {
+  .shop-landing { padding: 28px 20px 32px; gap: 20px; }
+  .shop-landing-title { font-size: 44px; }
+  .shop-overlay-price { font-size: 36px; }
+}
+
+/* Merch list */
+.merch-list {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+  text-align: left;
+}
+.merch-list li {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: rgba(255,255,255,0.7);
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  letter-spacing: 1px;
+}
+.merch-list li:last-child { border-bottom: none; }
+
+/* social-link icon alignment */
+.social-link { display: flex; align-items: center; gap: 12px; }
+
+/* Gallery items hidden — filmstrip built dynamically */
+#gallery .gallery-item { display: none !important; }
+/* ---- GALLERY GRID VIEW ---- */
+.gallery-grid-view { display: none; grid-template-columns: repeat(4,1fr); gap: 3px; width: 100%; }
+#gallery.grid-view .gallery-grid-view { display: grid; }
+section#gallery.grid-view.spa-active { overflow-y: auto !important; height: auto !important; min-height: 100vh; display: block !important; padding: 0 !important; }
+#gallery.grid-view .gallery-featured-wrap,
+#gallery.grid-view .gallery-filmstrip,
+#gallery.grid-view .gallery-actions { display: none !important; }
+#gallery.grid-view .gallery-back-btn { display: none !important; }
+.gallery-grid-item { position: relative; overflow: hidden; aspect-ratio: 1; cursor: pointer; }
+.gallery-grid-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; display: block; }
+.gallery-grid-item:hover img { transform: scale(1.05); }
+.gallery-grid-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.72)); padding: 10px 8px 8px; opacity: 0; transition: opacity 0.25s; pointer-events: none; }
+.gallery-grid-item:hover .gallery-grid-overlay { opacity: 1; }
+.gallery-grid-overlay h3 { color: #fff; font-size: 11px; font-family: var(--font-display); text-transform: uppercase; letter-spacing: 1px; margin: 0; font-weight: 700; }
+#gallery:not(.grid-view) .gallery-back-btn { display: flex; }
+/* ---- LOAD MORE ---- */
+.load-more-btn { display: block; margin: 20px auto 40px; padding: 14px 48px; background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.3); border-radius: 0; font-family: var(--font-display); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; }
+.load-more-btn:hover { background: #fff; color: #000; }
+/* ---- MOBILE GRID ---- */
+@media (max-width: 768px) {
+  .gallery-grid-view { grid-template-columns: repeat(2,1fr) !important; gap: 2px !important; }
+  .gallery-grid-overlay { opacity: 1; padding: 6px 6px 5px; }
+  .gallery-grid-overlay h3 { font-size: 9px; letter-spacing: 0.5px; }
+  .load-more-btn { padding: 12px 36px; font-size: 11px; margin: 16px auto 32px; }
+}
+/* ---- SHARE PANEL ---- */
+.share-panel { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 10000; display: flex; align-items: flex-end; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
+.share-panel.active { opacity: 1; pointer-events: all; }
+.share-panel-inner { background: #111; border-radius: 16px 16px 0 0; width: 100%; max-width: 520px; padding: 24px 24px 48px; }
+.share-panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+.share-panel-header span { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 2px; }
+.share-close-btn { background: none; border: none; color: rgba(255,255,255,0.6); font-size: 22px; cursor: pointer; padding: 0; line-height: 1; }
+.share-close-btn:hover { color: #fff; }
+.share-platforms { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; } @media (max-width: 768px) { .share-platforms { grid-template-columns: repeat(4,1fr); gap: 8px; } }
+.share-platform { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 14px 6px 12px; background: rgba(255,255,255,0.07); border-radius: 12px; border: none; cursor: pointer; text-decoration: none; color: rgba(255,255,255,0.85); font-family: var(--font-body); font-size: 10px; letter-spacing: 0.5px; transition: background 0.2s; text-align: center; }
+.share-platform:hover { background: rgba(255,255,255,0.14); color: #fff; }
+.share-platform svg { width: 22px; height: 22px; }
+
+/* Gallery back button — mobile only */
+.gallery-back-btn {
+  display: none;
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 20;
+  background: rgba(0,0,0,0.55);
+  border: none;
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ===== CONTACT FORM ===== */
+.contact-wrap { width: 100%; max-width: none; }
+.contact-form { display: flex; flex-direction: column; gap: 16px; }
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-size: 13px;
+  padding: 14px 18px;
+  letter-spacing: 0.5px;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder { color: rgba(255,255,255,0.3); }
+.form-group input:focus,
+.form-group textarea:focus { border-color: var(--red); }
+.form-group textarea { resize: vertical; min-height: 140px; }
+.contact-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 48px 0;
+  text-align: center;
+}
+.contact-success h3 {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  letter-spacing: 4px;
+  color: #fff;
+}
+.contact-success p {
+  font-family: var(--font-body);
+  color: rgba(255,255,255,0.5);
+  font-size: 13px;
+}
+
+/* ===== GALLERY ACTIONS ===== */
+.gallery-actions {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  gap: 8px;
+  z-index: 2;
+}
+.gallery-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0,0,0,0.65);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 13px;
+  letter-spacing: 2px;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+.gallery-action-btn:hover {
+  background: var(--red);
+  border-color: var(--red);
+}
+
+/* ===== COPY TOAST ===== */
+.copy-toast {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--red);
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: 14px;
+  letter-spacing: 2px;
+  padding: 10px 24px;
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+  pointer-events: none;
+  z-index: 9999;
+}
+.copy-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ===== TYPEWRITER CURSOR ===== */
+.tw-cursor {
+  display: inline-block;
+  animation: twBlink 0.8s step-end infinite;
+  color: var(--red);
+  font-weight: 300;
+}
+@keyframes twBlink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+/* ===== EMAIL CAPTURE ===== */
+.email-capture {
+  margin-top: 36px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+.email-capture-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+.email-capture-form {
+  display: flex;
+  gap: 0;
+  max-width: 360px;
+  margin: 0 auto;
+}
+.email-capture-form input {
+  flex: 1;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-right: none;
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 12px;
+  padding: 12px 16px;
+  outline: none;
+  letter-spacing: 0.5px;
+  -webkit-appearance: none;
+}
+.email-capture-form input:focus { border-color: var(--red); }
+.email-capture-form input::placeholder { color: rgba(255,255,255,0.3); }
+.email-capture-btn {
+  background: var(--red);
+  border: 1px solid var(--red);
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: 16px;
+  letter-spacing: 3px;
+  padding: 12px 22px;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+.email-capture-btn:hover { background: #e0303e; }
+.email-capture-thanks {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--red);
+  margin-top: 10px;
+}
+
+/* ===== GALLERY COPY BUTTON ===== */
+.gallery-action-btn.copy-btn {}
+
+/* Gallery price + buy */
+.gallery-price-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.gallery-price {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  letter-spacing: 3px;
+  color: #ffffff;
+}
+.gallery-buy-btn {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  letter-spacing: 3px;
+  padding: 8px 20px;
+  background: var(--red);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.gallery-buy-btn:hover { background: #e0303e; }
+
+/* Mailing list trigger button */
+.email-capture-trigger {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  letter-spacing: 5px;
+  padding: 14px 40px;
+  background: transparent;
+  border: 2px solid rgba(255,255,255,0.4);
+  color: #ffffff;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  text-transform: uppercase;
+}
+.email-capture-trigger:hover {
+  border-color: var(--red);
+  background: rgba(204,41,54,0.1);
+}
+</style>
+<!-- Google tag (gtag.js) -->
+
 </head>
-
 <body>
-  <!-- ====================================
-       NAVIGATION
-       ==================================== -->
-  
-  <nav id="mainNav">
-    <a href="#" class="nav-logo" onclick="showPage('home'); return false;" id="navLogo">
-      <!-- Logo SVG or image goes here -->
-    </a>
-    
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#home" onclick="showPage('home'); return false;" data-tip="HOME">HOME</a></li>
-      <li><a href="#gallery" onclick="showPage('gallery'); return false;" data-tip="GALLERY">GALLERY</a></li>
-      <li><a href="#about" onclick="showPage('about'); return false;" data-tip="ABOUT">ABOUT</a></li>
-      <li><a href="#merch" onclick="showPage('merch'); return false;" data-tip="SHOP">SHOP</a></li>
-      <li><a href="#connect" onclick="showPage('connect'); return false;" data-tip="CONNECT">CONNECT</a></li>
-    </ul>
-    
-    <div class="nav-hamburger" id="hamburger" onclick="toggleNav()">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </nav>
 
-  <!-- ====================================
-       HOME / HERO SECTION
-       ==================================== -->
-  
-  <section class="hero page-section spa-active" id="home">
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#" class="nav-logo" onclick="showPage('home'); return false;" id="navLogo">
+    <img src="images/nav-logo.png" alt="Erickson Wright Art" onerror="this.style.display='none';document.getElementById('navLogoFallback').style.display='flex';">
+    <div class="nav-logo-fallback" id="navLogoFallback" style="display:none;">RR</div>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home" onclick="showPage('home'); return false;" data-tip="Home">
+      <svg class="icon-outline" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
+      <svg class="icon-filled" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9" fill="none" stroke="rgba(10,10,10,0.5)" stroke-width="1.5"/></svg>
+      <span class="nav-label">Home</span>
+    </a></li>
+    <li><a href="#gallery" onclick="showPage('gallery'); return false;" data-tip="Gallery">
+      <svg class="icon-outline" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      <svg class="icon-filled" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      <span class="nav-label">Gallery</span>
+    </a></li>
+    <li><a href="#about" onclick="showPage('about'); return false;" data-tip="About">
+      <svg class="icon-outline" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      <svg class="icon-filled" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7z"/></svg>
+      <span class="nav-label">About</span>
+    </a></li>
+    <li><a href="#merch" onclick="showPage('merch'); return false;" data-tip="Merch">
+      <svg class="icon-outline" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/></svg>
+      <svg class="icon-filled" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/></svg>
+      <span class="nav-label">Merch</span>
+    </a></li>
+    <li></li>
+    <li></li>
+    <li><a href="#connect" onclick="showPage('connect'); return false;" data-tip="Connect">
+      <svg class="icon-outline" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+      <svg class="icon-filled" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+      <span class="nav-label">Connect</span>
+    </a></li>
+  </ul>
+  <div class="nav-hamburger" id="hamburger" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+
+
+<!-- HERO -->
+<section class="hero page-section spa-active" id="home">
     <div class="hero-logo-wrap">
       <img src="images/SignatureMed.jpg" alt="Erickson Wright Signature" class="hero-logo" style="border-radius:4px;">
     </div>
@@ -967,111 +1775,22 @@
     </div>
   </section>
 
-  <!-- ====================================
-       LIGHTBOX
-       ==================================== -->
-  
-  <div class="lightbox" id="lightbox" onclick="closeLightboxBg(event)">
-    <img id="lightbox-img" src="" alt="">
-    <div class="lightbox-caption" id="lightbox-caption"></div>
-  </div>
+<footer>
+  <p>&copy; 2026 Erickson Wright &bull; Folk Art on Found Surfaces</p>
+</footer>
 
-  <!-- ====================================
-       JAVASCRIPT
-       ==================================== -->
-  
-  <script>
-    // ====================================
-    // NAVIGATION
-    // ====================================
-    
-    function toggleNav() {
-      document.getElementById('navLinks').classList.toggle('open');
-      document.getElementById('hamburger').classList.toggle('open');
-    }
-    
-    function closeNav() {
-      document.getElementById('navLinks').classList.remove('open');
-      document.getElementById('hamburger').classList.remove('open');
-    }
-    
-    window.addEventListener('scroll', () => {
-      document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 60);
-    });
-    
-    // ====================================
-    // SPA PAGE SYSTEM (showPage function)
-    // ====================================
-    
-    function showPage(id) {
-      // CRITICAL: Clean up glass nav inline styles before switching pages
-      var gallery = document.getElementById('gallery');
-      if (gallery) {
-        gallery.style.removeProperty('position');
-        gallery.style.removeProperty('top');
-        gallery.style.removeProperty('bottom');
-        gallery.style.removeProperty('left');
-        gallery.style.removeProperty('right');
-        gallery.style.removeProperty('width');
-        gallery.style.removeProperty('background');
-        gallery.style.removeProperty('padding');
-        gallery.style.removeProperty('margin');
-        gallery.style.removeProperty('min-height');
-        gallery.style.removeProperty('overflow');
-      }
-      document.body.style.removeProperty('padding-left');
-      document.body.style.removeProperty('overflow-y');
-      var nav = document.querySelector('nav');
-      if (nav) {
-        nav.style.removeProperty('background');
-        nav.style.removeProperty('-webkit-backdrop-filter');
-        nav.style.removeProperty('backdrop-filter');
-      }
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightboxBg(event)">
+  <button class="lightbox-close" onclick="closeLightbox()">&#x2715;</button>
+  <button class="lightbox-nav lightbox-prev" onclick="event.stopPropagation(); navLightbox(-1)">&#8249;</button>
+  <img id="lightbox-img" src="" alt="">
+  <button class="lightbox-nav lightbox-next" onclick="event.stopPropagation(); navLightbox(1)">&#8250;</button>
+  <div class="lightbox-caption" id="lightbox-caption"></div>
+</div>
 
-      // Hide all sections
-      document.querySelectorAll('.page-section').forEach(function(s) {
-        s.classList.remove('spa-active');
-      });
-
-      // Show target section
-      var target = document.getElementById(id);
-      if (target) {
-        target.classList.add('spa-active');
-        window.scrollTo(0, 0);
-      }
-
-      // Update nav active state
-      document.querySelectorAll('.nav-links a').forEach(function(a) {
-        var href = a.getAttribute('href');
-        a.classList.toggle('active', href === '#' + id);
-      });
-
-      // Load lazy images in the newly-visible section
-      if (target) {
-        var sectionLazy = target.querySelectorAll('img[data-lazy-src]');
-        sectionLazy.forEach(function(img) {
-          img.src = img.dataset.lazySrc;
-          delete img.dataset.lazySrc;
-        });
-      }
-
-      // Gallery setup
-      if (id === 'gallery') {
-        initFilmstrip();
-        showGalleryGrid();
-      }
-
-      // Push URL state (use top. because we're inside iframe)
-      try { top.history.pushState(null, '', '/' + (id === 'home' ? '' : id)); } catch(e) {}
-
-      closeNav();
-    }
-    
-    // ====================================
-    // GALLERY SYSTEM
-    // ====================================
-    
-    var __paintings = [
+<script>
+// ---- PAINTINGS DATA ----
+var __paintings = [
       {title:"The Gang's All Here", img:"images/TheGangs.jpg", medium:"Acrylic on reclaimed wood", price:"", forSale:true},
       {title:"The Well Read Cow", img:"images/RedCow.jpg", medium:"Acrylic on vintage window", price:"", forSale:true},
       {title:"A Peace Offering", img:"images/dz8vto3l7mnsc4uws5hg.jpg", medium:"Acrylic on reclaimed wood", price:"", forSale:true},
@@ -1104,400 +1823,808 @@
       {title:"Golden Pear", img:"images/PEARnew_circle.jpg", medium:"Acrylic on gold-leaf platter", price:"", forSale:true},
       {title:"Pear Study", img:"images/pear1.jpg", medium:"Acrylic on vintage surface", price:"", forSale:true},
     ];
-    var __paintingsPerPage = 100; // loads all at once
-    var __paintingsLoaded = 0;
+var __paintingsPerPage = 100;
+var __paintingsLoaded = 0;
 
-    // Render gallery grid items with lazy loading
-    function loadMorePaintings() {
-      var grid = document.getElementById('galleryGrid');
-      if (!grid) return;
-      grid.innerHTML = '';
-      __paintingsLoaded = 0;
-      var end = Math.min(__paintingsLoaded + __paintingsPerPage, __paintings.length);
-      for (var i = __paintingsLoaded; i < end; i++) {
-        var p = __paintings[i];
-        var item = document.createElement('div');
-        item.className = 'gallery-item';
-        var img = document.createElement('img');
-        img.alt = p.title;
-        // Lazy loading with IntersectionObserver
-        img.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3C/svg%3E";
-        img.dataset.lazySrc = p.img;
-        img.dataset.title = p.title;
-        img.dataset.medium = p.medium;
-        img.dataset.price = p.price || '';
-        img.dataset.forSale = p.forSale;
-        img.onclick = function() { openGalleryFromGrid(this); };
-        item.appendChild(img);
+// ---- NAV ----
+function toggleNav() {
+  document.getElementById('navLinks').classList.toggle('open');
+  document.getElementById('hamburger').classList.toggle('open');
+}
+function closeNav() {
+  document.getElementById('navLinks').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+}
 
-        var info = document.createElement('div');
-        info.className = 'item-info';
-        info.innerHTML = '<h3>' + p.title + '</h3><p>' + p.medium + '</p>';
-        item.appendChild(info);
-        grid.appendChild(item);
-      }
-      __paintingsLoaded = end;
+// Shrink nav on scroll
+window.addEventListener('scroll', () => {
+  document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 60);
+});
 
-      // IntersectionObserver for lazy loading
-      var lazyImages = grid.querySelectorAll('img[data-lazy-src]');
-      if ('IntersectionObserver' in window) {
-        var observer = new IntersectionObserver(function(entries) {
-          entries.forEach(function(entry) {
-            if (entry.isIntersecting) {
-              entry.target.src = entry.target.dataset.lazySrc;
-              delete entry.target.dataset.lazySrc;
-              observer.unobserve(entry.target);
-            }
-          });
-        }, { rootMargin: '200px' });
-        lazyImages.forEach(function(img) { observer.observe(img); });
+// ---- GALLERY FILTER ----
+const allItems = [...document.querySelectorAll('.gallery-item')];
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    allItems.forEach(item => {
+      const show = filter === 'all' || item.dataset.category === filter;
+      item.style.opacity = show ? '1' : '0.12';
+      item.style.pointerEvents = show ? '' : 'none';
+      item.style.transition = 'opacity 0.35s ease';
+    });
+  });
+});
+
+// ---- LIGHTBOX ----
+let currentLBIndex = 0;
+
+function visibleItems() {
+  return allItems.filter(i => i.style.opacity !== '0.12');
+}
+
+function openLightbox(el) {
+  const visible = visibleItems();
+  currentLBIndex = visible.indexOf(el);
+  showLightboxItem(visible[currentLBIndex]);
+  document.getElementById('lightbox').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function showLightboxItem(el) {
+  const img = el.querySelector('img');
+  const lbImg = document.getElementById('lightbox-img');
+  const cap = document.getElementById('lightbox-caption');
+  lbImg.src = img.src;
+  lbImg.alt = img.alt;
+  const info = el.querySelector('.item-info');
+  cap.textContent = info ? info.querySelector('h3').textContent + ' — ' + info.querySelector('span').textContent : img.alt;
+}
+
+function navLightbox(dir) {
+  const visible = visibleItems();
+  currentLBIndex = (currentLBIndex + dir + visible.length) % visible.length;
+  showLightboxItem(visible[currentLBIndex]);
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function closeLightboxBg(e) {
+  if (e.target === document.getElementById('lightbox')) closeLightbox();
+}
+
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('lightbox').classList.contains('active')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') navLightbox(-1);
+  if (e.key === 'ArrowRight') navLightbox(1);
+});
+
+// ---- SCROLL REVEAL ----
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// Active nav highlight on scroll
+(function() {
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+
+  function setActive(id) {
+    navLinks.forEach(a => {
+      const target = a.getAttribute('href').slice(1);
+      a.classList.toggle('active', target === id);
+    });
+  }
+
+  // Set home active on load
+  setActive('home');
+
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) setActive(e.target.id);
+    });
+  }, { threshold: 0.3, rootMargin: '-10% 0px -60% 0px' });
+
+  sections.forEach(s => obs.observe(s));
+})();
+
+// ===== SPA PAGE SYSTEM =====
+function showPage(id) {
+  document.body.classList.remove('gallery-grid-active');
+  document.body.style.removeProperty('padding-left');
+  document.body.style.removeProperty('overflow-y');
+  var __nav = document.querySelector('nav');
+  if (__nav) { __nav.style.removeProperty('background'); __nav.style.removeProperty('-webkit-backdrop-filter'); __nav.style.removeProperty('backdrop-filter'); }
+  var __gal = document.getElementById('gallery');
+  if (__gal) { __gal.style.removeProperty('position'); __gal.style.removeProperty('top'); __gal.style.removeProperty('bottom'); __gal.style.removeProperty('left'); __gal.style.removeProperty('right'); __gal.style.removeProperty('width'); __gal.style.removeProperty('background'); __gal.style.removeProperty('padding'); __gal.style.removeProperty('margin'); __gal.style.removeProperty('min-height'); __gal.style.removeProperty('overflow'); }
+  // contact is now merged into connect
+  if (id === 'contact') id = 'connect';
+  document.querySelectorAll('.page-section').forEach(function(s) {
+    s.classList.remove('spa-active');
+  });
+  var target = document.getElementById(id);
+  if (target) {
+    target.classList.add('spa-active');
+    window.scrollTo(0, 0);
+  }
+  document.querySelectorAll('.nav-links a').forEach(function(a) {
+    var href = a.getAttribute('href');
+    a.classList.toggle('active', href === '#' + id);
+  });
+  if (id === 'gallery') { initFilmstrip(); showGalleryGrid(); }
+  if (id === 'shop') initShopPage();
+  // Trigger scroll-reveal for elements in the newly shown section
+  if (target) {
+    setTimeout(function() {
+      target.querySelectorAll('.reveal').forEach(function(el) {
+        el.classList.add('visible');
+      });
+    }, 50);
+  }
+  try {
+    var urlPath = (id === 'home') ? '/' : '/' + id;
+    top.history.pushState({page: id}, '', urlPath);
+  } catch(e) {}
+}
+
+// Handle browser back/forward
+top.addEventListener('popstate', function(e) {
+  var id = (e.state && e.state.page) ? e.state.page : 'home';
+  showPage(id);
+});
+
+// Arrow key gallery navigation
+document.addEventListener('keydown', function(e) {
+  var gallery = document.getElementById('gallery');
+  if (!gallery || !gallery.classList.contains('spa-active')) return;
+  var lb = document.getElementById('lightbox');
+  var lbOpen = lb && lb.classList.contains('active');
+  if (e.key === 'ArrowRight') { e.preventDefault(); navFilmstrip(1); }
+  else if (e.key === 'ArrowLeft') { e.preventDefault(); navFilmstrip(-1); }
+  else if (e.key === 'Escape' && lbOpen) { lb.classList.remove('active'); document.body.style.overflow = ''; }
+});
+
+// On load, navigate to page from URL path
+(function() {
+  var path = '';
+  var paintingSlug = '';
+  try {
+    var srch = top.location.search;
+    var pIdx = srch.indexOf('p=');
+    if (pIdx !== -1) {
+      path = srch.substring(pIdx + 2).split('&')[0];
+      /* Check for painting param */
+      var paintIdx = srch.indexOf('painting=');
+      if (paintIdx !== -1) paintingSlug = srch.substring(paintIdx + 9).split('&')[0];
+      top.history.replaceState({page: path}, '', '/' + path + (paintingSlug ? '/' + paintingSlug : ''));
+    } else {
+      var fullPath = top.location.pathname.replace(/^\//, '').replace(/\/$/, '') || '';
+      /* Handle /gallery/slug deep links */
+      if (fullPath.indexOf('gallery/') === 0) {
+        path = 'gallery';
+        paintingSlug = fullPath.substring(8);
       } else {
-        lazyImages.forEach(function(img) { img.src = img.dataset.lazySrc; });
+        path = fullPath;
       }
     }
-    
-    function initFilmstrip() {
-      var filmstrip = document.getElementById('galleryFilmstrip');
-      if (!filmstrip) return;
-      filmstrip.innerHTML = '';
-      
-      __paintings.forEach(function(painting, i) {
-        var thumb = document.createElement('img');
-        thumb.className = 'film-thumb' + (i === 0 ? ' film-active' : '');
-        // Lazy load filmstrip thumbnails — only load first 6 immediately
-        if (i < 6) { thumb.src = painting.img; }
-        else { thumb.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3C/svg%3E"; thumb.dataset.lazySrc = painting.img; }
-        thumb.alt = painting.title;
-        thumb.dataset.title = painting.title;
-        thumb.dataset.medium = painting.medium;
-        thumb.dataset.price = painting.price;
-        thumb.dataset.forSale = painting.forSale;
-        thumb.onclick = function() { selectFilmThumb(this); };
-        filmstrip.appendChild(thumb);
-        
-        if (i === 0) {
-          document.getElementById('galleryFeaturedImg').src = painting.img;
-          document.getElementById('galleryFeaturedTitle').textContent = painting.title;
-          document.getElementById('galleryFeaturedMedium').textContent = painting.medium;
-          updateGalleryPrice(painting);
+  } catch(e) {
+    var fullPath = window.location.pathname.replace(/^\//, '').replace(/\/$/, '') || '';
+    if (fullPath.indexOf('gallery/') === 0) {
+      path = 'gallery';
+      paintingSlug = fullPath.substring(8);
+    } else {
+      path = fullPath;
+    }
+  }
+  var validPages = ['gallery','shop','merch','about','videos','connect'];
+  if (path && validPages.indexOf(path) !== -1) {
+    showPage(path);
+  }
+  /* Deep-link to specific painting */
+  if (paintingSlug && path === 'gallery') {
+    window.__pendingPaintingSlug = paintingSlug;
+    setTimeout(function() {
+      var thumbs = document.querySelectorAll('.film-thumb');
+      for (var i = 0; i < thumbs.length; i++) {
+        var t = thumbs[i];
+        var tTitle = (t.dataset.title || t.alt || '').toLowerCase().replace(/[()]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/-+$/,'').replace(/^-+/,'');
+        if (tTitle === paintingSlug) {
+          var gallery = document.getElementById('gallery');
+          if (gallery) gallery.classList.remove('grid-view');
+          selectFilmThumb(t);
+          window.scrollTo(0, 0);
+          break;
         }
-      });
-      // Lazy load remaining filmstrip thumbnails as they scroll into view
-      var lazyThumbs = filmstrip.querySelectorAll('img[data-lazy-src]');
-      if ('IntersectionObserver' in window) {
-        var thumbObserver = new IntersectionObserver(function(entries) {
-          entries.forEach(function(entry) {
-            if (entry.isIntersecting) {
-              entry.target.src = entry.target.dataset.lazySrc;
-              delete entry.target.dataset.lazySrc;
-              thumbObserver.unobserve(entry.target);
-            }
-          });
-        }, { root: filmstrip, rootMargin: '300px' });
-        lazyThumbs.forEach(function(img) { thumbObserver.observe(img); });
-      } else {
-        lazyThumbs.forEach(function(img) { img.src = img.dataset.lazySrc; });
       }
+    }, 300);
+  }
+})();
+
+// ===== GALLERY FILMSTRIP =====
+function selectFilmThumb(el) {
+  document.getElementById('galleryFeaturedImg').src = el.src;
+  document.getElementById('galleryFeaturedTitle').textContent = el.dataset.title || '';
+  document.getElementById('galleryFeaturedMedium').textContent = el.dataset.medium || '';
+  document.querySelectorAll('.film-thumb').forEach(function(t) { t.classList.remove('film-active'); });
+  el.classList.add('film-active');
+  /* Update URL to per-painting deep link */
+  var paintSlug = (el.dataset.title || el.alt || '').toLowerCase().replace(/[()]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/-+$/,'').replace(/^-+/,'');
+  if (paintSlug) { try { top.history.replaceState({page:'gallery',painting:paintSlug}, '', '/gallery/' + paintSlug); } catch(e){} }
+  // Show price + buy if for sale
+  var priceEl = document.getElementById('galleryPrice');
+  var buyEl = document.getElementById('galleryBuyBtn');
+  if (priceEl && buyEl) {
+    if (el.dataset.price) {
+      priceEl.textContent = '$' + el.dataset.price;
+      priceEl.style.display = 'inline';
+      buyEl.style.display = 'inline-block';
+    } else {
+      priceEl.style.display = 'none';
+      buyEl.style.display = 'none';
     }
-    
-    function selectFilmThumb(el) {
-      // Load lazy src if not yet loaded
-      if (el.dataset.lazySrc) { el.src = el.dataset.lazySrc; delete el.dataset.lazySrc; }
-      document.getElementById('galleryFeaturedImg').src = el.src;
-      document.getElementById('galleryFeaturedTitle').textContent = el.dataset.title || '';
-      document.getElementById('galleryFeaturedMedium').textContent = el.dataset.medium || '';
-      
-      document.querySelectorAll('.film-thumb').forEach(function(t) {
-        t.classList.remove('film-active');
-      });
-      el.classList.add('film-active');
-      
-      updateGalleryPrice({
-        price: el.dataset.price,
-        forSale: el.dataset.forSale
-      });
+  }
+}
+
+function openFeaturedLightbox() {
+  var img = document.getElementById('galleryFeaturedImg');
+  var lb = document.getElementById('lightbox');
+  if (lb && img) {
+    var lbImg = lb.querySelector('img');
+    if (lbImg) lbImg.src = img.src;
+    lb.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function initShopPage() {
+  var shopImg = document.getElementById('shopPainting');
+  if (!shopImg) return;
+  if (shopImg.getAttribute('src')) return; // already loaded
+  for (var i = 0; i < __paintings.length; i++) {
+    if (__paintings[i].forSale) {
+      shopImg.setAttribute('src', __paintings[i].img);
+      break;
     }
-    
-    function updateGalleryPrice(painting) {
+  }
+}
+
+function initFilmstrip() {
+  var filmstrip = document.getElementById('galleryFilmstrip');
+  var featuredImg = document.getElementById('galleryFeaturedImg');
+  var featuredTitle = document.getElementById('galleryFeaturedTitle');
+  var featuredMedium = document.getElementById('galleryFeaturedMedium');
+  if (!filmstrip || !__paintings.length) return;
+  filmstrip.innerHTML = '';
+  __paintings.forEach(function(p, i) {
+    var thumb = document.createElement('img');
+    thumb.className = 'film-thumb' + (i === 0 ? ' film-active' : '');
+    thumb.src = p.img;
+    thumb.alt = p.title;
+    thumb.dataset.title = p.title;
+    thumb.dataset.medium = p.medium;
+    thumb.dataset.price = p.price || '';
+    thumb.dataset.forSale = p.forSale ? 'true' : '';
+    thumb.onclick = function() { selectFilmThumb(this); };
+    filmstrip.appendChild(thumb);
+    if (i === 0) {
+      featuredImg.src = p.img;
+      if (featuredTitle) featuredTitle.textContent = p.title;
+      if (featuredMedium) featuredMedium.textContent = p.medium;
       var priceEl = document.getElementById('galleryPrice');
       var buyEl = document.getElementById('galleryBuyBtn');
-      if (painting.price) {
-        priceEl.textContent = '$' + painting.price;
+      if (priceEl && buyEl && p.price) {
+        priceEl.textContent = '$' + p.price;
         priceEl.style.display = 'inline';
         buyEl.style.display = 'inline-block';
-      } else {
-        priceEl.style.display = 'none';
-        buyEl.style.display = 'none';
       }
     }
-    
-    function showGalleryGrid() {
-      document.querySelector('.gallery-featured-wrap').style.display = 'none';
-      document.querySelector('.gallery-grid').style.display = 'grid';
-      document.getElementById('galleryFilmstrip').style.display = 'none';
-      document.getElementById('gallery').classList.add('grid-view');
-      loadMorePaintings();
+  });
+}
 
-      // FROSTED GLASS NAV — mobile only
-      // MUST use setProperty with !important to override CSS !important rules
-      // DO NOT refactor to CSS-only — it was tried 10+ times and failed
-      if (window.innerWidth <= 768) {
-        var gallery = document.getElementById('gallery');
-        gallery.style.setProperty('position','relative','important');
-        gallery.style.setProperty('top','0','important');
-        gallery.style.setProperty('bottom','auto','important');
-        gallery.style.setProperty('left','0','important');
-        gallery.style.setProperty('right','0','important');
-        gallery.style.setProperty('width','100vw','important');
-        gallery.style.setProperty('background','transparent','important');
-        gallery.style.setProperty('padding','0','important');
-        gallery.style.setProperty('margin','0','important');
-        gallery.style.setProperty('min-height','100vh','important');
-        gallery.style.setProperty('overflow','visible','important');
-        document.body.style.setProperty('padding-left','0','important');
-        document.body.style.setProperty('overflow-y','auto','important');
-        var nav = document.querySelector('nav');
-        if (nav) {
-          nav.style.setProperty('background','rgba(0,0,0,0.35)','important');
-          nav.style.setProperty('-webkit-backdrop-filter','saturate(180%) blur(16px)','important');
-          nav.style.setProperty('backdrop-filter','saturate(180%) blur(16px)','important');
-        }
-      }
-    }
+document.addEventListener('DOMContentLoaded', initFilmstrip);
 
-    function openGalleryFromGrid(thumb) {
-      // CRITICAL: Clean up glass nav inline styles
-      var gallery = document.getElementById('gallery');
-      if (gallery) {
-        gallery.style.removeProperty('position');
-        gallery.style.removeProperty('top');
-        gallery.style.removeProperty('bottom');
-        gallery.style.removeProperty('left');
-        gallery.style.removeProperty('right');
-        gallery.style.removeProperty('width');
-        gallery.style.removeProperty('background');
-        gallery.style.removeProperty('padding');
-        gallery.style.removeProperty('margin');
-        gallery.style.removeProperty('min-height');
-        gallery.style.removeProperty('overflow');
-      }
-      document.body.style.removeProperty('padding-left');
-      document.body.style.removeProperty('overflow-y');
-      var nav = document.querySelector('nav');
-      if (nav) {
-        nav.style.removeProperty('background');
-        nav.style.removeProperty('-webkit-backdrop-filter');
-        nav.style.removeProperty('backdrop-filter');
-      }
+// ===== GALLERY: SWIPE NAVIGATION =====
+(function() {
+  var startX = 0, startY = 0;
+  function navFilmstrip(dir) {
+    var thumbs = Array.from(document.querySelectorAll('.film-thumb'));
+    if (!thumbs.length) return;
+    var activeIdx = thumbs.findIndex(function(t) { return t.classList.contains('film-active'); });
+    var nextIdx = (activeIdx + dir + thumbs.length) % thumbs.length;
+    selectFilmThumb(thumbs[nextIdx]);
+    // Scroll filmstrip to keep active thumb visible
+    thumbs[nextIdx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  }
 
-      selectFilmThumb(thumb);
-      document.querySelector('.gallery-featured-wrap').style.display = 'flex';
-      document.querySelector('.gallery-grid').style.display = 'none';
-      document.getElementById('galleryFilmstrip').style.display = 'flex';
+  // ---- SWIPE GESTURES ----
+  (function() {
+    var startX = 0, startY = 0, tracking = false;
+    var wrap = null;
+    function getWrap() {
+      if (!wrap) wrap = document.querySelector('.gallery-featured-wrap');
+      return wrap;
     }
-    
-    // MOBILE SHARE: files-only pattern
-    // NEVER add url or title to navigator.share() when sharing with files
-    // — causes iOS to show the image TWICE (file + OG preview)
-    var __shareInProgress = false;
-    function shareGalleryImage() {
-      if (__shareInProgress) return;
-      __shareInProgress = true;
-      setTimeout(function() { __shareInProgress = false; }, 2000);
+    document.addEventListener('touchstart', function(e) {
+      var w = getWrap();
+      if (!w || !w.offsetParent) return;
+      if (!w.contains(e.target)) return;
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      tracking = true;
+    }, { passive: true });
+    document.addEventListener('touchend', function(e) {
+      if (!tracking) return;
+      tracking = false;
+      var dx = e.changedTouches[0].clientX - startX;
+      var dy = e.changedTouches[0].clientY - startY;
+      if (Math.abs(dx) < 50 || Math.abs(dy) > Math.abs(dx)) return;
+      if (dx < 0) navFilmstrip(1);
+      else navFilmstrip(-1);
+    }, { passive: true });
+  })();
 
-      var imgEl = document.getElementById('galleryFeaturedImg');
-      var title = document.getElementById('galleryFeaturedTitle').textContent || '';
-      var slug = title.toLowerCase().replace(/[()]/g,'').replace(/[^a-z0-9]+/g,'-');
+  var wrap = null;
+  document.addEventListener('DOMContentLoaded', function() {
+    wrap = document.querySelector('.gallery-featured-wrap');
+    if (!wrap) return;
+    wrap.addEventListener('touchstart', function(e) {
+      startX = e.changedTouches[0].clientX;
+      startY = e.changedTouches[0].clientY;
+    }, { passive: true });
+    wrap.addEventListener('touchend', function(e) {
+      var dx = e.changedTouches[0].clientX - startX;
+      var dy = e.changedTouches[0].clientY - startY;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+        navFilmstrip(dx < 0 ? 1 : -1);
+      }
+    }, { passive: true });
+  });
+})();
 
-      if (navigator.share && window.innerWidth <= 768) {
-        // MOBILE: Share with FILES ONLY
-        fetch(imgEl.src).then(function(r) { return r.blob(); }).then(function(blob) {
-          var ext = blob.type.indexOf('png') !== -1 ? '.png' : '.jpg';
-          var file = new File([blob], slug + ext, { type: blob.type });
-          navigator.share({ files: [file] });  // FILES ONLY — no url, no title!
-        }).catch(function() {});
-      } else {
-        // DESKTOP: Copy link
-        var url = window.location.href;
-        navigator.clipboard.writeText(url).then(function() {
-          showToast('LINK COPIED');
-        }).catch(function() {
-          showToast('Link copied');
-        });
-      }
-    }
+// ===== GALLERY: SAVE + SHARE =====
 
-    // MOBILE SWIPE GESTURES on gallery featured view
-    (function() {
-      var startX = 0, startY = 0, tracking = false;
-      var wrap = null;
-      function getWrap() {
-        if (!wrap) wrap = document.querySelector('.gallery-featured-wrap');
-        return wrap;
-      }
-      document.addEventListener('touchstart', function(e) {
-        var w = getWrap();
-        if (!w || !w.offsetParent) return;
-        if (!w.contains(e.target)) return;
-        startX = e.touches[0].clientX;
-        startY = e.touches[0].clientY;
-        tracking = true;
-      }, { passive: true });
-      document.addEventListener('touchend', function(e) {
-        if (!tracking) return;
-        tracking = false;
-        var dx = e.changedTouches[0].clientX - startX;
-        var dy = e.changedTouches[0].clientY - startY;
-        if (Math.abs(dx) < 50 || Math.abs(dy) > Math.abs(dx)) return;
-        if (dx < 0) navFilmstrip(1);
-        else navFilmstrip(-1);
-      }, { passive: true });
-    })();
+var __shareInProgress = false;
+function shareGalleryImage() {
+  if (__shareInProgress) return;
+  __shareInProgress = true;
+  setTimeout(function() { __shareInProgress = false; }, 2000);
+  var titleEl = document.getElementById('galleryFeaturedTitle');
+  var title = titleEl ? titleEl.textContent : 'Erickson Wright Art';
+  var slug = title.toLowerCase().replace(/[()]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/-+$/,'').replace(/^-+/,'');
+  var url = 'https://ericksonwright.com/gallery/' + slug;
+  var shareText = '"' + title + '" by Erickson Wright @ericksonwright | ericksonwright.com #art #originalart #painting';
 
-    function navFilmstrip(dir) {
-      var thumbs = Array.from(document.querySelectorAll('.film-thumb'));
-      if (!thumbs.length) return;
-      var activeIdx = thumbs.findIndex(function(t) { return t.classList.contains('film-active'); });
-      var nextIdx = activeIdx + dir;
-      if (nextIdx < 0 || nextIdx >= thumbs.length) return;
-      selectFilmThumb(thumbs[nextIdx]);
-      thumbs[nextIdx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-    }
-    
-    function showToast(msg) {
-      var toast = document.getElementById('copyToast');
-      if (!toast) {
-        toast = document.createElement('div');
-        toast.id = 'copyToast';
-        toast.className = 'copy-toast';
-        document.body.appendChild(toast);
-      }
-      toast.textContent = msg;
-      toast.classList.add('show');
-      setTimeout(function() { toast.classList.remove('show'); }, 2200);
-    }
-    
-    // ====================================
-    // LIGHTBOX
-    // ====================================
-    
-    function openFeaturedLightbox() {
-      var img = document.getElementById('galleryFeaturedImg');
-      var lb = document.getElementById('lightbox');
-      if (lb && img) {
-        var lbImg = lb.querySelector('img');
-        if (lbImg) lbImg.src = img.src;
-        lb.style.display = 'flex';
-      }
-    }
-    
-    function closeLightbox() {
-      document.getElementById('lightbox').style.display = 'none';
-    }
-    
-    function closeLightboxBg(e) {
-      if (e.target === document.getElementById('lightbox')) closeLightbox();
-    }
-    
-    document.addEventListener('keydown', function(e) {
-      if (document.getElementById('lightbox').style.display !== 'flex') return;
-      if (e.key === 'Escape') closeLightbox();
-    });
-    
-    // ====================================
-    // FORMS (EMAIL & CONTACT)
-    // ====================================
-    
-    function revealMailingForm() {
-      var trig = document.getElementById('mailingTrigger');
-      if (trig) trig.style.display = 'none';
-      document.getElementById('mailingFormWrap').style.display = 'block';
-      setTimeout(function() { 
-        document.getElementById('mailingEmail').focus(); 
-      }, 50);
-    }
-    
-    (function() {
-      var form = document.getElementById('mailingForm');
-      if (!form) return;
-      form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        var fd = new FormData();
-        fd.append('email', document.getElementById('mailingEmail').value);
-        fd.append('_subject', 'New Mailing List Signup — Erickson Wright');
-        fd.append('_template', 'box');
-        fd.append('_captcha', 'false');
-        
-        fetch('https://formsubmit.co/ajax/wrightericson@bellsouth.net', {
-          method: 'POST',
-          body: fd,
-          headers: { 'Accept': 'application/json' }
-        }).then(function() {
-          document.getElementById('mailingFormWrap').style.display = 'none';
-          document.getElementById('mailingThanks').style.display = 'block';
-        }).catch(function() {
-          document.getElementById('mailingFormWrap').style.display = 'none';
-          document.getElementById('mailingThanks').style.display = 'block';
-        });
-      });
-    })();
-    
-    (function() {
-      var form = document.getElementById('contactForm');
-      if (!form) return;
-      form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        var btn = document.getElementById('contactSubmitBtn');
-        btn.textContent = 'Sending...';
-        btn.disabled = true;
-        
-        var data = new FormData(form);
-        fetch('https://formsubmit.co/ajax/wrightericson@bellsouth.net', {
-          method: 'POST',
-          body: data,
-          headers: { 'Accept': 'application/json' }
-        })
-        .then(function() {
-          form.style.display = 'none';
-          document.getElementById('contactSuccess').style.display = 'flex';
-        })
-        .catch(function() {
-          btn.textContent = 'Send It';
-          btn.disabled = false;
-          alert('Something went wrong — please email wrightericson@bellsouth.net directly.');
-        });
-      });
-    })();
-    
-    // ====================================
-    // TYPEWRITER EFFECT
-    // ====================================
-    
-    (function() {
-      var text = 'Folk Art on Found Surfaces';
-      var el = document.getElementById('heroTypewriter');
-      if (!el) return;
-      var i = 0;
-      function type() {
-        if (i < text.length) {
-          el.textContent += text[i++];
-          setTimeout(type, i < 8 ? 80 : 55);
+  /* Mobile: try native Web Share API first — the industry standard */
+  if (navigator.share && window.innerWidth <= 768) {
+    var imgEl = document.getElementById('galleryFeaturedImg');
+    if (imgEl && imgEl.src) {
+      fetch(imgEl.src).then(function(r) { return r.blob(); }).then(function(blob) {
+        var ext = blob.type.indexOf('png') !== -1 ? '.png' : '.jpg';
+        var file = new File([blob], slug + ext, { type: blob.type });
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+          navigator.share({ files: [file] }).catch(function(){});
         } else {
-          var cursor = document.querySelector('.tw-cursor');
-          if (cursor) cursor.style.display = 'none';
+          navigator.share({ title: title + ' — Erickson Wright Art', text: shareText, url: url }).catch(function(){});
         }
-      }
-      setTimeout(type, 900);
-    })();
-    
-    // ====================================
-    // INITIALIZATION
-    // ====================================
-    
-    document.addEventListener('DOMContentLoaded', function() {
-      showPage('home');
+      }).catch(function() {
+        navigator.share({ title: title + ' — Erickson Wright Art', text: shareText, url: url }).catch(function(){});
+      });
+    } else {
+      navigator.share({ title: title + ' — Erickson Wright Art', text: shareText, url: url }).catch(function(){});
+    }
+    return;
+  }
+
+  /* Desktop / fallback: show share panel */
+  var panel = document.getElementById('sharePanel');
+  if (!panel) {
+    panel = document.createElement('div');
+    panel.id = 'sharePanel';
+    panel.className = 'share-panel';
+    panel.addEventListener('click', function(e) { if (e.target === panel) panel.classList.remove('active'); });
+    var inner = document.createElement('div');
+    inner.className = 'share-panel-inner';
+    var hdr = document.createElement('div');
+    hdr.className = 'share-panel-header';
+    var hdrtxt = document.createElement('span');
+    hdrtxt.textContent = 'Share';
+    var closeBtn = document.createElement('button');
+    closeBtn.className = 'share-close-btn';
+    closeBtn.innerHTML = '&#215;';
+    closeBtn.onclick = function() { panel.classList.remove('active'); };
+    hdr.appendChild(hdrtxt);
+    hdr.appendChild(closeBtn);
+    var plats = document.createElement('div');
+    plats.className = 'share-platforms';
+    panel.__plats = plats;
+    inner.appendChild(hdr);
+    inner.appendChild(plats);
+    panel.appendChild(inner);
+    document.body.appendChild(panel);
+  }
+  var plats = panel.__plats;
+  plats.innerHTML = '';
+  var urlEnc = encodeURIComponent(url);
+  var textEnc = encodeURIComponent(shareText);
+  var titleEnc = encodeURIComponent(title + ' — Erickson Wright Art');
+
+  function mkBtn(label, svgPath, href, fn) {
+    var el = href ? document.createElement('a') : document.createElement('button');
+    el.className = 'share-platform';
+    if (href) { el.href = href; el.target = '_blank'; el.rel = 'noopener'; }
+    if (fn) el.onclick = fn;
+    el.innerHTML = svgPath + '<span>' + label + '</span>';
+    return el;
+  }
+
+  /* SVG icons — minimal inline, consistent 24x24 viewBox */
+  var igSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="#fff" stroke="none"/></svg>';
+  var ttSvg = '<svg viewBox="0 0 24 24" fill="#fff"><path d="M19.3 6.5a4.2 4.2 0 01-3-1.3A4.2 4.2 0 0115 2h-3.2v13.4a2.6 2.6 0 01-2.6 2.4 2.6 2.6 0 01-2.6-2.6c0-1.4 1.2-2.6 2.6-2.6.3 0 .5 0 .8.1V9.4a6 6 0 00-.8-.1 5.8 5.8 0 00-5.8 5.9 5.8 5.8 0 005.8 5.8 5.8 5.8 0 005.8-5.8V9.3a7.4 7.4 0 004.3 1.4V7.5a4.2 4.2 0 01-1-.1z"/></svg>';
+  var fbSvg = '<svg viewBox="0 0 24 24" fill="#fff"><path d="M22 12a10 10 0 10-11.6 9.9v-7h-2.5v-3h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 3h-2.4v7A10 10 0 0022 12z"/></svg>';
+  var xSvg = '<svg viewBox="0 0 24 24" fill="#fff"><path d="M18.9 1.2h3.7L14.6 10l9.4 12.8h-7.3l-5.7-7.5-6.5 7.5H1l8.5-9.7L.7 1.2H8l5.2 6.8 6-6.8zm-1.3 20.5h2L6.6 3.2H4.5l13.1 18.5z" transform="scale(0.85) translate(2,2)"/></svg>';
+  var pinSvg = '<svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2C6.5 2 2 6.5 2 12c0 4.2 2.6 7.8 6.3 9.3-.1-.8-.2-2 0-2.9.2-.8 1.3-5.4 1.3-5.4s-.3-.7-.3-1.6c0-1.5.9-2.7 2-2.7.9 0 1.4.7 1.4 1.6 0 1-.6 2.4-1 3.7-.3 1.2.6 2.1 1.7 2.1 2.1 0 3.7-2.2 3.7-5.4 0-2.8-2-4.8-4.9-4.8-3.4 0-5.3 2.5-5.3 5.1 0 1 .4 2.1.9 2.7.1.1.1.2.1.3l-.3 1.3c-.1.3-.2.3-.4.2-1.5-.7-2.4-2.9-2.4-4.7 0-3.8 2.8-7.3 8-7.3 4.2 0 7.4 3 7.4 7 0 4.1-2.6 7.5-6.3 7.5-1.2 0-2.4-.6-2.8-1.4l-.8 2.9c-.3 1.1-1 2.5-1.5 3.3 1.1.4 2.3.5 3.5.5 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>';
+  var waSvg = '<svg viewBox="0 0 24 24" fill="#fff"><path d="M17.5 14.4l-2-1c-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.3.3-.6.1-.3-.2-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.9-.2-.3 0-.4.1-.6l.4-.4c.1-.2.2-.3.1-.5l-1-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.6-.7 1.9-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3zM12 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.6 1 1-3.5-.2-.4a9.8 9.8 0 1115.3-8.1c0 5.4-4.4 9.8-9.8 9.8zM12 2a10 10 0 00-8.5 15.3L2 22l4.8-1.2A10 10 0 1012 2z"/></svg>';
+  var smsSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>';
+  var mailSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>';
+  var dlSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>';
+  var cpSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>';
+
+  function closePanel() { panel.classList.remove('active'); }
+  function copyAndToast() {
+    navigator.clipboard.writeText(url).then(function() { showToast('LINK COPIED'); });
+    closePanel();
+  }
+
+  /* Build buttons */
+  var igBtn = mkBtn('Instagram', igSvg, null, function() {
+    if (navigator.share) { navigator.share({ title: titleEnc, url: url }).catch(function(){}); }
+    else { copyAndToast(); }
+    closePanel();
+  });
+  var ttBtn = mkBtn('TikTok', ttSvg, null, function() {
+    if (navigator.share) { navigator.share({ title: titleEnc, url: url }).catch(function(){}); }
+    else { copyAndToast(); }
+    closePanel();
+  });
+  var fbBtn = mkBtn('Facebook', fbSvg, 'https://www.facebook.com/sharer/sharer.php?u=' + urlEnc);
+  var xBtn = mkBtn('X / Twitter', xSvg, 'https://twitter.com/intent/tweet?url=' + urlEnc + '&text=' + textEnc);
+  var pinBtn = mkBtn('Pinterest', pinSvg, 'https://pinterest.com/pin/create/button/?url=' + urlEnc + '&description=' + textEnc);
+  var waBtn = mkBtn('WhatsApp', waSvg, 'https://wa.me/?text=' + textEnc + '%20' + urlEnc);
+  var smsBtn = mkBtn('iMessage', smsSvg, 'sms:?&body=' + textEnc + '%20' + urlEnc);
+  var mailBtn = mkBtn('Email', mailSvg, 'mailto:?subject=' + titleEnc + '&body=' + textEnc + '%20' + urlEnc);
+  var dlBtn = mkBtn('Save Image', dlSvg, null, function() {
+    var img = document.getElementById('galleryFeaturedImg');
+    if (img && img.src) {
+      var a = document.createElement('a');
+      a.href = img.src; a.download = (title || 'ericksonwright') + '.jpg';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    }
+    closePanel();
+  });
+  var cpBtn = mkBtn('Copy Link', cpSvg, null, function() { copyAndToast(); });
+
+  [igBtn, ttBtn, fbBtn, xBtn, pinBtn, waBtn, smsBtn, mailBtn].forEach(function(b) { plats.appendChild(b); });
+  panel.classList.add('active');
+}
+
+function showGalleryGrid() {
+  var gallery = document.getElementById('gallery');
+  if (!gallery) return;
+  initFilmstrip();
+  var grid = document.getElementById('galleryGridView');
+  if (!grid) {
+    grid = document.createElement('div');
+    grid.id = 'galleryGridView';
+    grid.className = 'gallery-grid-view';
+    gallery.appendChild(grid);
+  }
+  grid.innerHTML = '';
+  __paintingsLoaded = 0;
+  loadMorePaintings();
+  gallery.classList.add('grid-view');
+  document.body.classList.add('gallery-grid-active');
+  if (window.innerWidth <= 768) {
+    gallery.style.setProperty('position','relative','important');
+    gallery.style.setProperty('top','0','important');
+    gallery.style.setProperty('bottom','auto','important');
+    gallery.style.setProperty('left','0','important');
+    gallery.style.setProperty('right','0','important');
+    gallery.style.setProperty('width','100vw','important');
+    gallery.style.setProperty('background','transparent','important');
+    gallery.style.setProperty('padding','0','important');
+    gallery.style.setProperty('margin','0','important');
+    gallery.style.setProperty('min-height','100vh','important');
+    gallery.style.setProperty('overflow','visible','important');
+    document.body.style.setProperty('padding-left','0','important');
+    document.body.style.setProperty('overflow-y','auto','important');
+    var nav = document.querySelector('nav');
+    if (nav) {
+      nav.style.setProperty('background','rgba(0,0,0,0.35)','important');
+      nav.style.setProperty('-webkit-backdrop-filter','saturate(180%) blur(16px)','important');
+      nav.style.setProperty('backdrop-filter','saturate(180%) blur(16px)','important');
+    }
+  }
+  try { top.history.replaceState({page:'gallery'}, '', '/gallery'); } catch(e) {}
+}
+
+function loadMorePaintings() {
+  var grid = document.getElementById('galleryGridView');
+  if (!grid) return;
+  var end = Math.min(__paintingsLoaded + __paintingsPerPage, __paintings.length);
+  var thumbs = document.querySelectorAll('.film-thumb');
+  for (var idx = __paintingsLoaded; idx < end; idx++) {
+    var p = __paintings[idx];
+    var item = document.createElement('div');
+    item.className = 'gallery-grid-item';
+    var img = document.createElement('img');
+    img.src = 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1 1%22%3E%3C/svg%3E';
+    img.dataset.lazySrc = p.img;
+    img.alt = p.title;
+    img.style.background = '#1a1a1a';
+    var overlay = document.createElement('div');
+    overlay.className = 'gallery-grid-overlay';
+    var h3 = document.createElement('h3');
+    h3.textContent = p.title;
+    overlay.appendChild(h3);
+    item.appendChild(img); item.appendChild(overlay);
+    if (thumbs[idx]) {
+      (function(t) { item.onclick = function() { openGalleryFromGrid(t); }; })(thumbs[idx]);
+    }
+    grid.appendChild(item);
+  }
+  __paintingsLoaded = end;
+  // Lazy load observer
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var img = entry.target;
+          if (img.dataset.lazySrc) {
+            img.src = img.dataset.lazySrc;
+            delete img.dataset.lazySrc;
+            observer.unobserve(img);
+          }
+        }
+      });
+    }, { rootMargin: '200px' });
+    grid.querySelectorAll('img[data-lazy-src]').forEach(function(img) { observer.observe(img); });
+  } else {
+    grid.querySelectorAll('img[data-lazy-src]').forEach(function(img) { img.src = img.dataset.lazySrc; });
+  }
+  // Infinite scroll sentinel
+  var existingSentinel = document.getElementById('galleryScrollSentinel');
+  if (existingSentinel) existingSentinel.remove();
+  if (__paintingsLoaded < __paintings.length) {
+    var sentinel = document.createElement('div');
+    sentinel.id = 'galleryScrollSentinel';
+    sentinel.style.height = '1px';
+    grid.parentNode.insertBefore(sentinel, grid.nextSibling);
+    if ('IntersectionObserver' in window) {
+      var scrollObs = new IntersectionObserver(function(entries) {
+        if (entries[0].isIntersecting) {
+          scrollObs.disconnect();
+          loadMorePaintings();
+        }
+      }, { rootMargin: '400px' });
+      scrollObs.observe(sentinel);
+    }
+  }
+}
+
+function openGalleryFromGrid(thumb) {
+  var gallery = document.getElementById('gallery');
+  if (gallery) {
+    gallery.classList.remove('grid-view');
+    gallery.style.removeProperty('position');
+    gallery.style.removeProperty('top');
+    gallery.style.removeProperty('bottom');
+    gallery.style.removeProperty('left');
+    gallery.style.removeProperty('right');
+    gallery.style.removeProperty('width');
+    gallery.style.removeProperty('background');
+    gallery.style.removeProperty('padding');
+    gallery.style.removeProperty('margin');
+    gallery.style.removeProperty('min-height');
+    gallery.style.removeProperty('overflow');
+  }
+  document.body.classList.remove('gallery-grid-active');
+  document.body.style.removeProperty('padding-left');
+  document.body.style.removeProperty('overflow-y');
+  var nav = document.querySelector('nav');
+  if (nav) {
+    nav.style.background = '';
+    nav.style.webkitBackdropFilter = '';
+    nav.style.backdropFilter = '';
+  }
+  selectFilmThumb(thumb);
+  window.scrollTo(0, 0);
+}
+
+function showToast(msg) {
+  var toast = document.getElementById('copyToast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'copyToast';
+    toast.className = 'copy-toast';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(function() { toast.classList.remove('show'); }, 2200);
+}
+
+// ===== CONTACT FORM =====
+(function() {
+  var form = document.getElementById('contactForm');
+  if (!form) return;
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var btn = document.getElementById('contactSubmitBtn');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+    var data = new FormData(form);
+    data.append('_subject', 'New message from Erickson Wright Art.com');
+    data.append('_template', 'box');
+    fetch('https://formsubmit.co/ajax/wrightericson@bellsouth.net', {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(res) {
+      form.style.display = 'none';
+      document.getElementById('contactSuccess').style.display = 'flex';
+    })
+    .catch(function() {
+      btn.textContent = 'Send It';
+      btn.disabled = false;
+      alert('Something went wrong — email wrightericson@bellsouth.net directly.');
     });
-  </script>
+  });
+})();
+
+// ===== TYPEWRITER =====
+(function() {
+  var text = 'Original Art • Prints • Merch • Comics';
+  var el = document.getElementById('heroTypewriter');
+  var cursor = document.querySelector('.tw-cursor');
+  if (!el) return;
+  var i = 0;
+  function type() {
+    if (i < text.length) {
+      el.textContent += text[i++];
+      setTimeout(type, i < 8 ? 80 : 55);
+    } else {
+      setTimeout(function() {
+        if (cursor) cursor.style.display = 'none';
+      }, 1200);
+    }
+  }
+  setTimeout(type, 900);
+})();
+
+// ===== MAILING LIST =====
+function revealMailingForm() {
+  var trig = document.getElementById('mailingTrigger');
+  if (trig) trig.style.display = 'none';
+  document.getElementById('mailingFormWrap').style.display = 'block';
+  setTimeout(function() { document.getElementById('mailingEmail').focus(); }, 50);
+}
+
+(function() {
+  var form = document.getElementById('mailingForm');
+  if (!form) return;
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var email = document.getElementById('mailingEmail').value;
+    var thanks = document.getElementById('mailingThanks');
+    var fd = new FormData();
+    fd.append('email', email);
+    fd.append('_subject', 'New Mailing List Signup — Erickson Wright Art');
+    fd.append('_template', 'box');
+    fd.append('_captcha', 'false');
+    fetch('https://formsubmit.co/ajax/wrightericson@bellsouth.net', {
+      method: 'POST', body: fd, headers: { 'Accept': 'application/json' }
+    }).then(function() {
+      document.getElementById('mailingFormWrap').style.display = 'none';
+      thanks.style.display = 'block';
+    }).catch(function() {
+      document.getElementById('mailingFormWrap').style.display = 'none';
+      thanks.style.display = 'block';
+    });
+  });
+})();
+
+// ===== MERCH PAGE MAILING LIST =====
+function revealMerchMailingForm() {
+  var trig = document.getElementById('merchMailingTrigger');
+  if (trig) trig.style.display = 'none';
+  var wrap = document.getElementById('mailingFormWrapMerch');
+  if (wrap) { wrap.style.display = 'block'; }
+  setTimeout(function() { var el = document.getElementById('mailingEmailMerch'); if (el) el.focus(); }, 50);
+}
+(function() {
+  var form = document.getElementById('mailingFormMerch');
+  if (!form) return;
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var email = document.getElementById('mailingEmailMerch').value;
+    var thanks = document.getElementById('mailingThanksMerch');
+    var fd = new FormData();
+    fd.append('email', email);
+    fd.append('_subject', 'New Mailing List Signup — Erickson Wright Art');
+    fd.append('_template', 'box');
+    fd.append('_captcha', 'false');
+    fetch('https://formsubmit.co/ajax/wrightericson@bellsouth.net', {
+      method: 'POST', body: fd, headers: { 'Accept': 'application/json' }
+    }).then(function() {
+      document.getElementById('mailingFormWrapMerch').style.display = 'none';
+      if (thanks) thanks.style.display = 'block';
+    }).catch(function() {
+      document.getElementById('mailingFormWrapMerch').style.display = 'none';
+      if (thanks) thanks.style.display = 'block';
+    });
+  });
+})();
+
+// ===== GALLERY: COPY IMAGE TO CLIPBOARD =====
+function copyGalleryImage(btn) {
+  var img = document.getElementById('galleryFeaturedImg');
+  var canvas = document.createElement('canvas');
+  var image = new Image();
+  image.onload = function() {
+    canvas.width = image.naturalWidth;
+    canvas.height = image.naturalHeight;
+    var ctx = canvas.getContext('2d');
+    ctx.drawImage(image, 0, 0);
+    canvas.toBlob(function(blob) {
+      if (!blob) { showToast('COPY NOT SUPPORTED'); return; }
+      navigator.clipboard.write([new ClipboardItem({'image/png': blob})])
+        .then(function() { showToast('IMAGE COPIED'); btn.textContent = '✓ Copied'; setTimeout(function(){ btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy'; }, 2000); })
+        .catch(function() { showToast('USE SAVE INSTEAD'); });
+    }, 'image/png');
+  };
+  image.src = img.src;
+}
+
+// ===== GALLERY: SAVE WITH WATERMARK =====
+function saveGalleryImage() {
+  var img = document.getElementById('galleryFeaturedImg');
+  var title = document.getElementById('galleryFeaturedTitle').textContent || 'ericksonwright';
+  var canvas = document.createElement('canvas');
+  var image = new Image();
+  image.onload = function() {
+    canvas.width = image.naturalWidth;
+    canvas.height = image.naturalHeight;
+    var ctx = canvas.getContext('2d');
+    ctx.drawImage(image, 0, 0);
+    // Watermark
+    var fs = Math.max(16, Math.round(canvas.width * 0.028));
+    ctx.font = 'bold ' + fs + 'px "Bebas Neue", Arial, sans-serif';
+    var pad = Math.round(canvas.width * 0.018);
+    var txt = 'ERICKSONWRIGHT.COM';
+    var tw = ctx.measureText(txt).width;
+    // Shadow for visibility on any bg
+    ctx.fillStyle = 'rgba(0,0,0,0.45)';
+    ctx.fillRect(canvas.width - tw - pad*2, canvas.height - fs - pad*2, tw + pad*2, fs + pad*1.5);
+    ctx.fillStyle = 'rgba(255,255,255,0.88)';
+    ctx.fillText(txt, canvas.width - tw - pad, canvas.height - pad);
+    var a = document.createElement('a');
+    a.href = canvas.toDataURL('image/jpeg', 0.92);
+    a.download = 'ericksonwright-' + title.replace(/[^a-z0-9]/gi,'-').toLowerCase() + '.jpg';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    showToast('SAVED WITH WATERMARK');
+  };
+  image.src = img.src;
+}
+</script>
 
 </body>
 </html>
