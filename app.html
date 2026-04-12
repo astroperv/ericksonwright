@@ -83,6 +83,9 @@ nav {
   border-right: 1px solid rgba(255,255,255,0.18);
 }
 
+
+.page-section { background: var(--dark); }
+.hero.page-section { background: #000 !important; }
 @media (max-width: 768px) {
   body { padding-left: 64px; }
   nav { width: 64px; background:#1a120d!important;  border-right:1px solid #2a1a0f; }
@@ -291,11 +294,7 @@ nav.scrolled { padding: 0; }
   box-shadow: 0 8px 24px rgba(240,232,216,0.12);
 }
 
-.btn-primary {
-  background: var(--red);
-  border-color: var(--red);
-  color: var(--white);
-}
+.btn-primary { background: transparent; border: 1px solid rgba(255,255,255,0.7); color: var(--white); }
 .btn-primary:hover {
   background: #e0303e;
   border-color: #e0303e;
@@ -1769,7 +1768,7 @@ section#gallery.grid-view.spa-active { overflow-y: auto !important; height: auto
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:60px; max-width:800px; margin:0 auto;">
       <!-- Info -->
       <div>
-        <h3 style="font-size:14px; letter-spacing:2px; text-transform:uppercase; margin-bottom:20px; font-family:var(--font-display);">Get in Touch</h3>
+        
         <p style="color:var(--cream); font-size:13px; line-height:1.8; margin-bottom:24px;">Interested in a painting, a commission, or showing my work? I'd love to hear from you. Send me a message and I'll get back to you soon.</p>
         
         <p style="color:rgba(255,248,240,0.4); font-size:12px; letter-spacing:1px; margin-top:24px;">Based in Georgia</p>
@@ -2682,6 +2681,12 @@ function saveGalleryImage() {
   .gal-arrow { opacity: 0.7; width: 36px; height: 36px; font-size: 18px; }
   .gal-arrow-left { left: 6px; }
   .gal-arrow-right { right: 6px; }
+}
+
+@media (max-width: 768px) {
+  .merch div[style*="flex"] { flex-direction: column !important; flex-wrap: wrap !important; align-items: center; }
+  .merch div[style*="flex"] .btn { width: 80%; text-align: center; }
+  .connect div[style*="grid"] { grid-template-columns: 1fr !important; }
 }
 </style>
 
