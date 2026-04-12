@@ -294,7 +294,7 @@ nav.scrolled { padding: 0; }
   box-shadow: 0 8px 24px rgba(240,232,216,0.12);
 }
 
-.btn-primary { background: transparent; border: 1px solid rgba(255,255,255,0.7); color: var(--white); }
+.btn-primary { background: transparent; border: 2px solid var(--white); color: var(--white); }
 .btn-primary:hover {
   background: #e0303e;
   border-color: #e0303e;
@@ -940,7 +940,7 @@ footer p {
   }
 
   .nav-links a:hover,
-  .nav-links a.active { color: #ffb347; }
+  .nav-links a.active { color: #ff6a00; }
 
   /* Hide text labels under icons */
   .nav-label {
@@ -1712,6 +1712,11 @@ section#gallery.grid-view.spa-active { overflow-y: auto !important; height: auto
   
   <section class="page-section" id="about">
     <h2>ABOUT</h2>
+<div style="max-width:700px; margin:30px auto;">
+<img src="images/sandy-gathering.jpg" alt="Sandy gathering surfaces to paint" style="width:100%; border:none; border-radius:0; display:block;">
+<p style="text-align:center; font-size:13px; color:var(--cream); margin:8px 0 30px;">Sandy gathering surfaces to paint</p>
+</div>
+
     <div style="max-width:700px; margin:0 auto;">
       
       <p style="margin-bottom:20px;">I was born in Michigan with a paint brush in my hand and the two of us have never since been separated.</p>
@@ -1722,17 +1727,11 @@ section#gallery.grid-view.spa-active { overflow-y: auto !important; height: auto
       <p style="margin-bottom:20px;">Part of my attraction to folk art is that there are few restraints — just a call to follow the muse of the day. Painting on found objects like vintage windows, rusty tin ceiling tiles, chippy painted doors or even an old blue or wood ironing board excites me. Just give me a textured surface I can interact with and I'm in heaven!</p>
       <p style="margin-bottom:20px;">Many mornings are spent over coffee while studying the mark of the patina of time on my awaiting surface and soon the direction for the day is found.</p>
       <p style="color:var(--cream); font-style:italic;">So now as you read this, you are entering my picture. My hope is that in some way your heart has been touched, or amused by my art and the full circle my spirit has traveled to create it. For me, this is the magic moment when art in it's purest level has been reached.</p>
-      <div style="clear:both; margin-top:30px; display:flex; gap:20px; flex-wrap:wrap; justify-content:center;">
-        <div style="flex:1; min-width:200px; max-width:350px;">
-          <img data-lazy-src="images/family-depression.jpg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3C/svg%3E" alt="The Erickson family" style="width:100%; border-radius:0; border:none; display:block;">
-          <p style="font-size:0.85em; color:var(--medium-gray); margin-top:8px; text-align:center;">The Erickson family</p>
-        </div>
-        <div style="flex:1; min-width:200px; max-width:350px;">
-          <img data-lazy-src="images/sandy-gathering.jpg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3C/svg%3E" alt="Sandy gathering surfaces" style="width:100%; border-radius:0; border:none; display:block;">
-          <p style="font-size:0.85em; color:var(--medium-gray); margin-top:8px; text-align:center;">Sandy gathering surfaces to paint</p>
-        </div>
-      </div>
-    </div>
+<div style="max-width:700px; margin:30px auto;">
+<img src="images/family-depression.jpg" alt="The Erickson family" style="width:100%; border:none; border-radius:0; display:block;">
+<p style="text-align:center; font-size:13px; color:var(--cream); margin:8px 0 0;">The Erickson family</p>
+</div>
+
   </section>
 
   <!-- ====================================
@@ -1741,7 +1740,7 @@ section#gallery.grid-view.spa-active { overflow-y: auto !important; height: auto
   
   <section class="merch page-section" id="merch">
     <h2>SHOP</h2>
-    <div style="max-width:600px; margin:0 auto; text-align:center;">
+    <div style="max-width:600px; margin:0 auto; text-align:left;">
       <p style="margin-bottom:30px; color:var(--cream); font-size:15px; line-height:1.8;">Original paintings, prints, and commissions available. Each piece is painted on a unique found surface — no two are alike. To inquire about a piece or commission a custom painting, please reach out through the contact form or email directly.</p>
       <div style="display:flex; gap:16px; justify-content:center; flex-wrap:nowrap;">
         <button class="btn btn-primary" onclick="showPage('gallery')">Browse Originals</button>
@@ -1813,7 +1812,6 @@ var __paintings = [
       {title:"The Gang's All Here", img:"images/TheGangs.jpg", medium:"Acrylic on reclaimed wood", price:"", forSale:true},
       
       {title:"A Peace Offering", img:"images/dz8vto3l7mnsc4uws5hg.jpg", medium:"Acrylic on reclaimed wood", price:"", forSale:true},
-      {title:"Just a Little Blush", img:"images/piz0ohl0gh00zqqjb8ds.jpg", medium:"Acrylic on vintage window", price:"", forSale:true},
       {title:"In The Pink", img:"images/pinkRooster.jpg", medium:"Acrylic on reclaimed door panel", price:"", forSale:true},
       {title:"Free Spirit Bear", img:"images/11---Free_Spirit-Bear---12__47075.jpg", medium:"Acrylic on reclaimed wood", price:"", forSale:true},
       {title:"Bear Spirit", img:"images/an2ikgl488tua3efcfib.jpg", medium:"Acrylic on reclaimed wood", price:"", forSale:true},
@@ -1822,16 +1820,13 @@ var __paintings = [
       {title:"Crow at Dusk", img:"images/crow.jpg", medium:"Acrylic on vintage wood", price:"", forSale:true},
       {title:"Whose Woods Are These", img:"images/treesWords.jpg", medium:"Mixed media on canvas", price:"", forSale:true},
       {title:"Golden Trees", img:"images/tree2.jpg", medium:"Acrylic on found surface", price:"", forSale:true},
-      {title:"Amber Grove", img:"images/tree4.jpg", medium:"Acrylic on found surface", price:"", forSale:true},
       {title:"Purple Treeline", img:"images/treespurp.jpg", medium:"Acrylic on canvas", price:"", forSale:true},
-      {title:"Brown Cow", img:"images/COWnew_Brown.jpg", medium:"Acrylic on reclaimed wood", price:"", forSale:true},
       {title:"Ghost Cow", img:"images/Cow_Ghost.jpg", medium:"Acrylic on reclaimed wood", price:"", forSale:true},
       {title:"Cash Cow", img:"images/9842794.jpeg", medium:"Mixed media on canvas", price:"", forSale:true},
       {title:"Chix Tip-Toeing", img:"images/Chix_TipToeing.jpg", medium:"Acrylic on found surface", price:"", forSale:true},
       {title:"Free Range", img:"images/2---Free-Range---5---__83493.jpg", medium:"Acrylic on reclaimed wood", price:"", forSale:true},
       {title:"Chicken Portrait", img:"images/chicken1.jpg", medium:"Acrylic on reclaimed wood", price:"", forSale:true},
       {title:"Rooster Study", img:"images/chicken2.jpg", medium:"Acrylic on found surface", price:"", forSale:true},
-      {title:"Cow Portrait", img:"images/cow2.jpg", medium:"Acrylic on reclaimed surface", price:"", forSale:true},
       {title:"Three Pears", img:"images/Pears_3.jpg", medium:"Acrylic on vintage surface", price:"", forSale:true},
       
       {title:"Pear Trio Reflected", img:"images/pearoncan.jpg", medium:"Acrylic on canvas", price:"", forSale:true},
@@ -2511,7 +2506,7 @@ function showToast(msg) {
 
 // ===== TYPEWRITER =====
 (function() {
-  var text = 'Original Paintings by Sandy Erickson Wright';
+  var text = 'Original Paintings\nSandy Erickson Wright';
   var el = document.getElementById('heroTypewriter');
   var cursor = document.querySelector('.tw-cursor');
   if (!el) return;
@@ -2687,6 +2682,8 @@ function saveGalleryImage() {
   .merch div[style*="flex"] { flex-direction: column !important; flex-wrap: wrap !important; align-items: center; }
   .merch div[style*="flex"] .btn { width: 80%; text-align: center; }
   .connect div[style*="grid"] { grid-template-columns: 1fr !important; }
+  .hero-cta { flex-direction: column; align-items: center; gap: 12px; }
+  .hero-cta .btn { width: 80%; text-align: center; }
 }
 </style>
 
