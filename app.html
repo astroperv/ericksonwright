@@ -1712,7 +1712,7 @@ section#gallery.grid-view.spa-active { overflow-y: auto !important; height: auto
   
   <section class="page-section" id="about">
     <h2>ABOUT</h2>
-<div style="max-width:700px; margin:30px auto;">
+<div style="max-width:700px; margin:30px auto; background:transparent;">
 <img src="images/sandy-gathering.jpg" alt="Sandy gathering surfaces to paint" style="width:100%; border:none; border-radius:0; display:block;">
 <p style="text-align:center; font-size:13px; color:var(--cream); margin:8px 0 30px;">Sandy gathering surfaces to paint</p>
 </div>
@@ -1727,7 +1727,7 @@ section#gallery.grid-view.spa-active { overflow-y: auto !important; height: auto
       <p style="margin-bottom:20px;">Part of my attraction to folk art is that there are few restraints — just a call to follow the muse of the day. Painting on found objects like vintage windows, rusty tin ceiling tiles, chippy painted doors or even an old blue or wood ironing board excites me. Just give me a textured surface I can interact with and I'm in heaven!</p>
       <p style="margin-bottom:20px;">Many mornings are spent over coffee while studying the mark of the patina of time on my awaiting surface and soon the direction for the day is found.</p>
       <p style="color:var(--cream); font-style:italic;">So now as you read this, you are entering my picture. My hope is that in some way your heart has been touched, or amused by my art and the full circle my spirit has traveled to create it. For me, this is the magic moment when art in it's purest level has been reached.</p>
-<div style="max-width:700px; margin:30px auto;">
+<div style="max-width:700px; margin:30px auto; background:transparent;">
 <img src="images/family-depression.jpg" alt="The Erickson family" style="width:100%; border:none; border-radius:0; display:block;">
 <p style="text-align:center; font-size:13px; color:var(--cream); margin:8px 0 0;">The Erickson family</p>
 </div>
@@ -1808,6 +1808,7 @@ section#gallery.grid-view.spa-active { overflow-y: auto !important; height: auto
 <script>
 // ---- PAINTINGS DATA ----
 var __paintings = [
+      {title:"Red Cow", img:"images/CowRed.jpg", medium:"Acrylic on vintage window", price:"", forSale:true},
       {title:"The Well Read Cow", img:"images/RedCow.jpg", medium:"Acrylic on vintage window", price:"", forSale:true},
       {title:"The Gang's All Here", img:"images/TheGangs.jpg", medium:"Acrylic on reclaimed wood", price:"", forSale:true},
       
@@ -2158,31 +2159,7 @@ document.addEventListener('DOMContentLoaded', initFilmstrip);
   window.navFilmstrip = navFilmstrip;
 
   // ---- SWIPE GESTURES ----
-  (function() {
-    var startX = 0, startY = 0, tracking = false;
-    var wrap = null;
-    function getWrap() {
-      if (!wrap) wrap = document.querySelector('.gallery-featured-wrap');
-      return wrap;
-    }
-    document.addEventListener('touchstart', function(e) {
-      var w = getWrap();
-      if (!w || !w.offsetParent) return;
-      if (!w.contains(e.target)) return;
-      startX = e.touches[0].clientX;
-      startY = e.touches[0].clientY;
-      tracking = true;
-    }, { passive: true });
-    document.addEventListener('touchend', function(e) {
-      if (!tracking) return;
-      tracking = false;
-      var dx = e.changedTouches[0].clientX - startX;
-      var dy = e.changedTouches[0].clientY - startY;
-      if (Math.abs(dx) < 50 || Math.abs(dy) > Math.abs(dx)) return;
-      if (dx < 0) navFilmstrip(1);
-      else navFilmstrip(-1);
-    }, { passive: true });
-  })();
+
 
   var wrap = null;
   document.addEventListener('DOMContentLoaded', function() {
