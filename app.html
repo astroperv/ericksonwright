@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -20,12 +20,12 @@
 <meta name="description" content="Original paintings, signed prints, and merch by Erickson Wright. Raw urban art with attitude.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Futura&family=Helvetica:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Futura&family=Helvetica:wght@100;200;300&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --black: #1a120d;
+  --black: #000000;
   --dark: #1e1510;
   --gray: #261c14;
   --light-gray: #33261b;
@@ -78,15 +78,14 @@ nav {
   justify-content: space-between;
   align-items: center;
   padding-top: 0;
-  background: rgba(10,10,10,0.92);
-  backdrop-filter: blur(12px);
+  background: #1a120d;
   transition: none;
   border-right: 1px solid rgba(255,255,255,0.18);
 }
 
 @media (max-width: 768px) {
   body { padding-left: 64px; }
-  nav { width: 64px; background: rgba(0,0,0,0.15) !important; backdrop-filter: saturate(180%) blur(16px); -webkit-backdrop-filter: saturate(180%) blur(16px); border-right: 1px solid rgba(255,255,255,0.1); }
+  nav { width: 64px; background:#1a120d!important;  border-right:1px solid #2a1a0f; }
   section#gallery.spa-active { background: transparent !important; }
   body.gallery-grid-active, body.gallery-active { padding-left: 0 !important; }
   .nav-links a { width: 64px; height: 60px; }
@@ -113,7 +112,7 @@ nav.scrolled { padding: 0; }
   justify-content: center;
   width: 96px;
   height: 90px;
-  color: #ffffff;
+  color: #e8922a;
   position: relative;
   transition: color 0.2s;
 }
@@ -121,7 +120,7 @@ nav.scrolled { padding: 0; }
 .nav-links a svg { width: 26px; height: 26px; }
 
 .nav-links a::after { display: none; }
-.nav-links a:hover { color: #ffffff; }
+.nav-links a:hover { color: #ffb347; }
 
 /* Tooltip on hover */
 .nav-links a[data-tip]::before {
@@ -782,7 +781,7 @@ section { padding: 100px 48px; }
 .connect-section-heading {
   font-family: var(--font-display);
   font-size: clamp(22px, 2.5vw, 36px);
-  font-weight: 800;
+  font-weight: 200;
   color: #ffffff;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -910,9 +909,7 @@ footer p {
     padding: 0;
     border-right: none;
     border-bottom: 1px solid rgba(255,255,255,0.08);
-    background: rgba(0,0,0,0.15);
-    backdrop-filter: saturate(180%) blur(18px);
-    -webkit-backdrop-filter: saturate(180%) blur(18px);
+    background: #1a120d;
     z-index: 1000;
   }
 
@@ -944,7 +941,7 @@ footer p {
   }
 
   .nav-links a:hover,
-  .nav-links a.active { color: #ffffff; }
+  .nav-links a.active { color: #ffb347; }
 
   /* Hide text labels under icons */
   .nav-label {
@@ -1361,7 +1358,7 @@ section#gallery.grid-view.spa-active { overflow-y: auto !important; height: auto
 .gallery-grid-item:hover img { transform: scale(1.05); }
 .gallery-grid-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.72)); padding: 10px 8px 8px; opacity: 0; transition: opacity 0.25s; pointer-events: none; }
 .gallery-grid-item:hover .gallery-grid-overlay { opacity: 1; }
-.gallery-grid-overlay h3 { color: #fff; font-size: 11px; font-family: var(--font-display); text-transform: uppercase; letter-spacing: 1px; margin: 0; font-weight: 700; }
+.gallery-grid-overlay h3 { color: #fff; font-size: 11px; font-family: var(--font-display); text-transform: uppercase; letter-spacing: 1px; margin: 0; font-weight: 200; }
 #gallery:not(.grid-view) .gallery-back-btn { display: flex; }
 /* ---- LOAD MORE ---- */
 .load-more-btn { display: block; margin: 20px auto 40px; padding: 14px 48px; background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.3); border-radius: 0; font-family: var(--font-display); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; }
@@ -1378,7 +1375,7 @@ section#gallery.grid-view.spa-active { overflow-y: auto !important; height: auto
 .share-panel.active { opacity: 1; pointer-events: all; }
 .share-panel-inner { background: #111; border-radius: 16px 16px 0 0; width: 100%; max-width: 520px; padding: 24px 24px 48px; }
 .share-panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
-.share-panel-header span { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 2px; }
+.share-panel-header span { font-family: var(--font-display); font-size: 18px; font-weight: 200; color: #fff; text-transform: uppercase; letter-spacing: 2px; }
 .share-close-btn { background: none; border: none; color: rgba(255,255,255,0.6); font-size: 22px; cursor: pointer; padding: 0; line-height: 1; }
 .share-close-btn:hover { color: #fff; }
 .share-platforms { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; } @media (max-width: 768px) { .share-platforms { grid-template-columns: repeat(4,1fr); gap: 8px; } }
@@ -1412,22 +1409,23 @@ section#gallery.grid-view.spa-active { overflow-y: auto !important; height: auto
 .form-group input,
 .form-group textarea {
   width: 100%;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.15);
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 8px;
   color: #ffffff;
   font-family: var(--font-body);
-  font-size: 13px;
-  padding: 14px 18px;
-  letter-spacing: 0.5px;
+  font-size: 15px;
+  padding: 16px 20px;
+  letter-spacing: 0.3px;
   outline: none;
-  transition: border-color 0.2s;
+  transition: border-color 0.3s, box-shadow 0.3s;
   box-sizing: border-box;
   -webkit-appearance: none;
 }
 .form-group input::placeholder,
-.form-group textarea::placeholder { color: rgba(255,255,255,0.3); }
+.form-group textarea::placeholder { color: rgba(255,255,255,0.45); letter-spacing: 0.5px; }
 .form-group input:focus,
-.form-group textarea:focus { border-color: var(--red); }
+.form-group textarea:focus { border-color: #e8922a; box-shadow: 0 0 0 3px rgba(232,146,42,0.15); }
 .form-group textarea { resize: vertical; min-height: 140px; }
 .contact-success {
   display: flex;
@@ -1714,9 +1712,7 @@ section#gallery.grid-view.spa-active { overflow-y: auto !important; height: auto
   <section class="page-section" id="about">
     <h2>About</h2>
     <div style="max-width:700px; margin:0 auto;">
-      <div style="float:right; margin:0 0 20px 30px; max-width:220px;">
-        <img data-lazy-src="images/sew-head.jpg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3C/svg%3E" alt="Erickson Wright" style="width:100%; border-radius:4px; border:2px solid var(--light-gray);">
-      </div>
+      
       <p style="margin-bottom:20px;">I was born in Michigan with a paint brush in my hand and the two of us have never since been separated.</p>
       <p style="margin-bottom:20px;">My life's journey to folk art has been full of adventure. In my early 20s, I flew for Pan American. That job allowed me to experience varied cultures — specifically art from Africa to Australia, Argentina to Austin and more! During my last three years with Pan Am, I created and ran my own art gallery in Tiburon, just north of San Francisco.</p>
       <p style="margin-bottom:20px;">After 7 years with Pan Am, I moved to Berlin, Germany. While there I discovered and became particularly fond of Bavarian folk art. Seven years in Europe was followed by a move to Santa Fe, NM. Three years of clear light and wide horizons, plus the bonus of meeting painters, potters, weavers and more, resulted in new visions for creative expression.</p>
@@ -1746,7 +1742,7 @@ section#gallery.grid-view.spa-active { overflow-y: auto !important; height: auto
     <h2>Shop</h2>
     <div style="max-width:600px; margin:0 auto; text-align:center;">
       <p style="margin-bottom:30px; color:var(--cream); font-size:15px; line-height:1.8;">Original paintings, prints, and commissions available. Each piece is painted on a unique found surface — no two are alike. To inquire about a piece or commission a custom painting, please reach out through the contact form or email directly.</p>
-      <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+      <div style="display:flex; gap:16px; justify-content:center; flex-wrap:nowrap;">
         <button class="btn btn-primary" onclick="showPage('gallery')">Browse Originals</button>
         <button class="btn" onclick="showPage('connect')">Inquire About a Piece</button>
       </div>
