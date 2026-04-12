@@ -2506,18 +2506,27 @@ function showToast(msg) {
 
 // ===== TYPEWRITER =====
 (function() {
-  var text = 'Original Paintings\nSandy Erickson Wright';
-  var el = document.getElementById('heroTypewriter');
-  var cursor = document.querySelector('.tw-cursor');
+  var tokens = [];
+  var raw = "Original Paintings<br>Sandy Erickson Wright";
+  for (var j = 0; j < raw.length; j++) {
+    if (raw[j] === "<" && raw.substring(j, j+4) === "<br>") {
+      tokens.push("<br>");
+      j += 3;
+    } else {
+      tokens.push(raw[j]);
+    }
+  }
+  var el = document.getElementById("heroTypewriter");
+  var cursor = document.querySelector(".tw-cursor");
   if (!el) return;
   var i = 0;
   function type() {
-    if (i < text.length) {
-      el.textContent += text[i++];
+    if (i < tokens.length) {
+      el.innerHTML += tokens[i++];
       setTimeout(type, i < 8 ? 80 : 55);
     } else {
       setTimeout(function() {
-        if (cursor) cursor.style.display = 'none';
+        if (cursor) cursor.style.display = "none"
       }, 1200);
     }
   }
