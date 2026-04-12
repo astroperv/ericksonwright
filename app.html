@@ -246,7 +246,7 @@ nav.scrolled { padding: 0; }
 
 .hero-tagline {
   font-family: var(--font-heading);
-  font-weight: 300;
+  font-weight: 100;
   text-transform: uppercase;
   font-size: clamp(16px, 2.2vw, 24px);
   letter-spacing: 7px;
@@ -271,7 +271,7 @@ nav.scrolled { padding: 0; }
 ======================== */
 .btn {
   font-family: var(--font-heading);
-  font-weight: 300;
+  font-weight: 100;
   font-size: 16px;
   letter-spacing: 3px;
   padding: 14px 38px;
@@ -335,7 +335,7 @@ section { padding: 100px 48px; }
 
 .section-title {
   font-family: var(--font-display);
-  font-weight: 300;
+  font-weight: 100;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-size: clamp(38px, 5.5vw, 68px);
@@ -420,7 +420,7 @@ section { padding: 100px 48px; }
 
 .item-info h3 {
   font-family: var(--font-display);
-  font-weight: 300;
+  font-weight: 100;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   font-size: 15px;
@@ -781,7 +781,7 @@ section { padding: 100px 48px; }
 .connect-section-heading {
   font-family: var(--font-display);
   font-size: clamp(22px, 2.5vw, 36px);
-  font-weight: 200;
+  font-weight: 100;
   color: #ffffff;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -1127,6 +1127,8 @@ footer p {
 
 /* ===== SPA PAGE SYSTEM ===== */
 .page-section { display: none; }
+section h2 { text-transform: uppercase; font-family: var(--font-display); font-weight: 100; letter-spacing: 3px; }
+
 .page-section.spa-active { display: block; animation: spafade 0.25s ease; }
 section#home.spa-active { display: flex; }
 @keyframes spafade { from { opacity: 0; } to { opacity: 1; } }
@@ -1358,7 +1360,7 @@ section#gallery.grid-view.spa-active { overflow-y: auto !important; height: auto
 .gallery-grid-item:hover img { transform: scale(1.05); }
 .gallery-grid-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.72)); padding: 10px 8px 8px; opacity: 0; transition: opacity 0.25s; pointer-events: none; }
 .gallery-grid-item:hover .gallery-grid-overlay { opacity: 1; }
-.gallery-grid-overlay h3 { color: #fff; font-size: 11px; font-family: var(--font-display); text-transform: uppercase; letter-spacing: 1px; margin: 0; font-weight: 200; }
+.gallery-grid-overlay h3 { color: #fff; font-size: 11px; font-family: var(--font-display); text-transform: uppercase; letter-spacing: 1px; margin: 0; font-weight: 100; }
 #gallery:not(.grid-view) .gallery-back-btn { display: flex; }
 /* ---- LOAD MORE ---- */
 .load-more-btn { display: block; margin: 20px auto 40px; padding: 14px 48px; background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.3); border-radius: 0; font-family: var(--font-display); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; }
@@ -1375,7 +1377,7 @@ section#gallery.grid-view.spa-active { overflow-y: auto !important; height: auto
 .share-panel.active { opacity: 1; pointer-events: all; }
 .share-panel-inner { background: #111; border-radius: 16px 16px 0 0; width: 100%; max-width: 520px; padding: 24px 24px 48px; }
 .share-panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
-.share-panel-header span { font-family: var(--font-display); font-size: 18px; font-weight: 200; color: #fff; text-transform: uppercase; letter-spacing: 2px; }
+.share-panel-header span { font-family: var(--font-display); font-size: 18px; font-weight: 100; color: #fff; text-transform: uppercase; letter-spacing: 2px; }
 .share-close-btn { background: none; border: none; color: rgba(255,255,255,0.6); font-size: 22px; cursor: pointer; padding: 0; line-height: 1; }
 .share-close-btn:hover { color: #fff; }
 .share-platforms { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; } @media (max-width: 768px) { .share-platforms { grid-template-columns: repeat(4,1fr); gap: 8px; } }
@@ -1503,7 +1505,7 @@ section#gallery.grid-view.spa-active { overflow-y: auto !important; height: auto
   display: inline-block;
   animation: twBlink 0.8s step-end infinite;
   color: var(--red);
-  font-weight: 300;
+  font-weight: 100;
 }
 @keyframes twBlink { 0%,100%{opacity:1} 50%{opacity:0} }
 
@@ -1639,8 +1641,8 @@ section#gallery.grid-view.spa-active { overflow-y: auto !important; height: auto
       <svg class="icon-filled" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/></svg>
       <span class="nav-label">Merch</span>
     </a></li>
-    <li></li>
-    <li></li>
+    
+    
     <li><a href="#connect" onclick="showPage('connect'); return false;" data-tip="Connect">
       <svg class="icon-outline" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
       <svg class="icon-filled" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
@@ -1710,7 +1712,7 @@ section#gallery.grid-view.spa-active { overflow-y: auto !important; height: auto
        ==================================== -->
   
   <section class="page-section" id="about">
-    <h2>About</h2>
+    <h2>ABOUT</h2>
     <div style="max-width:700px; margin:0 auto;">
       
       <p style="margin-bottom:20px;">I was born in Michigan with a paint brush in my hand and the two of us have never since been separated.</p>
@@ -1723,11 +1725,11 @@ section#gallery.grid-view.spa-active { overflow-y: auto !important; height: auto
       <p style="color:var(--cream); font-style:italic;">So now as you read this, you are entering my picture. My hope is that in some way your heart has been touched, or amused by my art and the full circle my spirit has traveled to create it. For me, this is the magic moment when art in it's purest level has been reached.</p>
       <div style="clear:both; margin-top:30px; display:flex; gap:20px; flex-wrap:wrap; justify-content:center;">
         <div style="flex:1; min-width:200px; max-width:350px;">
-          <img data-lazy-src="images/family-depression.jpg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3C/svg%3E" alt="The Erickson family" style="width:100%; border-radius:4px; border:2px solid var(--light-gray);">
+          <img data-lazy-src="images/family-depression.jpg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3C/svg%3E" alt="The Erickson family" style="width:100%; border-radius:0; border:none; display:block;">
           <p style="font-size:0.85em; color:var(--medium-gray); margin-top:8px; text-align:center;">The Erickson family</p>
         </div>
         <div style="flex:1; min-width:200px; max-width:350px;">
-          <img data-lazy-src="images/sandy-gathering.jpg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3C/svg%3E" alt="Sandy gathering surfaces" style="width:100%; border-radius:4px; border:2px solid var(--light-gray);">
+          <img data-lazy-src="images/sandy-gathering.jpg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3C/svg%3E" alt="Sandy gathering surfaces" style="width:100%; border-radius:0; border:none; display:block;">
           <p style="font-size:0.85em; color:var(--medium-gray); margin-top:8px; text-align:center;">Sandy gathering surfaces to paint</p>
         </div>
       </div>
@@ -1739,7 +1741,7 @@ section#gallery.grid-view.spa-active { overflow-y: auto !important; height: auto
        ==================================== -->
   
   <section class="merch page-section" id="merch">
-    <h2>Shop</h2>
+    <h2>SHOP</h2>
     <div style="max-width:600px; margin:0 auto; text-align:center;">
       <p style="margin-bottom:30px; color:var(--cream); font-size:15px; line-height:1.8;">Original paintings, prints, and commissions available. Each piece is painted on a unique found surface — no two are alike. To inquire about a piece or commission a custom painting, please reach out through the contact form or email directly.</p>
       <div style="display:flex; gap:16px; justify-content:center; flex-wrap:nowrap;">
@@ -1762,7 +1764,7 @@ section#gallery.grid-view.spa-active { overflow-y: auto !important; height: auto
        ==================================== -->
   
   <section class="page-section connect" id="connect">
-    <h2>Connect</h2>
+    <h2>CONNECT</h2>
 
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:60px; max-width:800px; margin:0 auto;">
       <!-- Info -->
@@ -1832,10 +1834,10 @@ var __paintings = [
       {title:"Rooster Study", img:"images/chicken2.jpg", medium:"Acrylic on found surface", price:"", forSale:true},
       {title:"Cow Portrait", img:"images/cow2.jpg", medium:"Acrylic on reclaimed surface", price:"", forSale:true},
       {title:"Three Pears", img:"images/Pears_3.jpg", medium:"Acrylic on vintage surface", price:"", forSale:true},
-      {title:"Rusty Pears", img:"images/Pears_Rusty.jpg", medium:"Acrylic on found surface", price:"", forSale:true},
+      
       {title:"Pear Trio Reflected", img:"images/pearoncan.jpg", medium:"Acrylic on canvas", price:"", forSale:true},
       {title:"Golden Pear", img:"images/PEARnew_circle.jpg", medium:"Acrylic on gold-leaf platter", price:"", forSale:true},
-      {title:"Pear Study", img:"images/pear1.jpg", medium:"Acrylic on vintage surface", price:"", forSale:true},
+      
     ];
 var __paintingsPerPage = 100;
 var __paintingsLoaded = 0;
